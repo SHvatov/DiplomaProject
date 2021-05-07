@@ -7,6 +7,8 @@ module Constants
     real, parameter :: q = 0.0
     
     real, parameter :: R = 0.0
+    integer, parameter :: N = 1
+    real, parameter :: Hr = R / N
 
     real, parameter :: D11 = 0.0
     real, parameter :: D22 = 0.0
@@ -39,6 +41,4 @@ module Constants
 
     complex, parameter :: DeltaGamma = IMG_UNIT * (Delta2 - Delta1) + (GParallel + q ** 2 * D12)
     complex, parameter :: DeltaGammaStroke = -IMG_UNIT * (Delta2 - Delta1) + (GParallel + q ** 2 * D12)
-
-    
 end module Constants

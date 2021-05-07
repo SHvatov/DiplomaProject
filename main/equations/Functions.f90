@@ -3,26 +3,35 @@ module Functions
     
     implicit none
 contains
-    ! Calculates the length of the insterval based on the radius (R) 
-    ! and number of the intervals (N).
-    function hr(R, N) result(retval)
-        implicit none
-        real :: R, retval
-        integer :: N
-        
-        retval = R / N
-    end function hr
-
     ! Calculates the r[i] based on the provided index (i), radius (R) 
     ! and number of the intervals (N).
-    function ri(i, R, N) result (retval)
+    function ri(i) result (retval)
         implicit none
         integer :: i
-        real :: R, retval
-        integer :: N
+        real :: retval
         
-        retval = hr(R, N) * i
+        retval = Hr * i
     end function ri
+
+    ! Calculates the r[i + 1/2] based on the provided index (i), radius (R) 
+    ! and number of the intervals (N).
+    function riPlusHalf(i) result (retval)
+        implicit none
+        integer :: i
+        real :: retval
+
+        retval = ri(i) + Hr / 2
+    end function riPlusHalf
+
+    ! Calculates the r[i - 1/2] based on the provided index (i), radius (R) 
+    ! and number of the intervals (N).
+    function riMinusHalf(i) result (retval)
+        implicit none
+        integer :: i
+        real :: retval
+
+        retval = ri(i) + Hr / 2
+    end function riMinusHalf
 
     ! Omega functions.
     ! Returns the complex result of the Omega function in the point (ri).
