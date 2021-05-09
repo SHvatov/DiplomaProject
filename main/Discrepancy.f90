@@ -6,7 +6,8 @@ module discrepancy
     implicit none
 contains
     ! TODO: replace function calls with the usage of the arrays with RO values
-    ! in the points of the net.
+    ! in the points of the net. Add two functions, one accepts vector 8 * (N + 1)
+    ! and main one, which accepts 8 vectors of (N + 1) len.
 
     ! Calculates the discrepancy vector (psiVector) based 
     ! on the functions and constants specified in the corresponding modules.
