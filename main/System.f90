@@ -1,6 +1,7 @@
 module System
     use Constants
-    use Functions
+    use CommonFunctions
+    use RoFunctions
 
     implicit none
 contains
