@@ -1,73 +1,9 @@
-module Functions 
-    use Constants
-    
+module RoFunctions
+    use CommonFunctions
+
     implicit none
 contains
-    ! Calculates the r[i] based on the provided index (i), radius (R) 
-    ! and number of the intervals (N).
-    function ri(i) result (retval)
-        implicit none
-        integer :: i
-        real :: retval
-        
-        retval = Hr * i
-    end function ri
-
-    ! Calculates the r[i + 1/2] based on the provided index (i), radius (R) 
-    ! and number of the intervals (N).
-    function riPlusHalf(i) result (retval)
-        implicit none
-        integer :: i
-        real :: retval
-
-        retval = ri(i) + Hr / 2
-    end function riPlusHalf
-
-    ! Calculates the r[i - 1/2] based on the provided index (i), radius (R) 
-    ! and number of the intervals (N).
-    function riMinusHalf(i) result (retval)
-        implicit none
-        integer :: i
-        real :: retval
-
-        retval = ri(i) + Hr / 2
-    end function riMinusHalf
-
-    ! Omega functions.
-    ! Returns the complex result of the Omega function in the point (r[i]).
-    function Omega1(i) result(retval)
-        implicit none
-        integer :: i
-        complex :: retval
-        
-        retval = C1 * e ** (ri(i) / a)
-    end function Omega1
-
-    function Omega1Conjg(i) result(retval)
-        implicit none
-        integer :: i
-        complex :: retval
-        
-        retval = conjg(Omega1(i))
-    end function Omega1Conjg
-
-    function Omega2(i) result(retval)
-        implicit none
-        integer :: i
-        complex :: retval
-        
-        retval = C2 * e ** (ri(i) / a)
-    end function Omega2
-
-    function Omega2Conjg(i) result(retval)
-        implicit none
-        integer :: i
-        complex :: retval
-        
-        retval = conjg(Omega2(i))
-    end function Omega2Conjg
-
-    ! RO functions.
+    ! RO Functions.
     ! Returns the complex result of the RO function in the point (r[i]).
     function Ro11(i) result (retval)
         implicit none
@@ -133,8 +69,8 @@ contains
         retval = conjg(Ro12(i))
     end function Ro12Conjg
 
-    ! Ro13, Ro31, Ro32, Ro23 functions.
-    ! Calculations are based on the equations (4) - (5) of the main Functions.
+    ! Ro13, Ro31, Ro32, Ro23 CommonFunctions.
+    ! Calculations are based on the equations (4) - (5) of the main CommonFunctions.
     ! Ro13 = Ro31*, Ro23 = Ro32*
     function Ro13(i) result (retval)
         implicit none
@@ -171,4 +107,4 @@ contains
         retval = -IMG_UNIT * conjg(Omega1(i)) * Ro12(i) / DeltaStroke22 &
             + IMG_UNIT * conjg(Omega1(i)) * (conjg(Ro33(i)) - conjg(Ro11(i))) / DeltaStroke22
     end function Ro23Conjg
-end module Functions
+end module RoFunctions

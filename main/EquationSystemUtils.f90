@@ -1,6 +1,118 @@
 module EquationSystemUtils
+    use Constants
+    use CommonFunctions
+    
     implicit none
 contains
-    ! TODO: add functions, that calculate Ro13, Ro31, Ro32, Ro23
-    ! based on the Ro11, Ro22, Ro33, Ro12 
+    function Ro23Point(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = IMG_UNIT * Omega1(i) * conjg(roMeshMatr(RO_12, i)) / DeltaStroke21 &
+            - IMG_UNIT * Omega1(i) * (roMeshMatr(RO_33, i) - roMeshMatr(RO_11, i)) / DeltaStroke21
+    end function Ro23Point
+
+    function Ro13Point(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = IMG_UNIT * Omega2(i) * roMeshMatr(RO_12, i) / DeltaStroke11 &
+            - IMG_UNIT * Omega1(i) * (roMeshMatr(RO_33, i) - roMeshMatr(RO_11, i)) / DeltaStroke11
+    end function Ro13Point
+
+    function Ro11Point(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = roMeshMatr(RO_11, i)
+    end function Ro11Point
+
+    function Ro22Point(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = roMeshMatr(RO_22, i)
+    end function Ro22Point
+
+    function Ro33Point(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = conjg(roMeshMatr(RO_33, i))
+    end function Ro33Point
+
+    function Ro12Point(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = conjg(roMeshMatr(RO_12, i))
+    end function Ro12Point
+
+    function Ro11PointConjg(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = conjg(roMeshMatr(RO_11, i))
+    end function Ro11PointConjg
+
+    function Ro22PointConjg(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = conjg(roMeshMatr(RO_22, i))
+    end function Ro22PointConjg
+
+    function Ro33PointConjg(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = conjg(roMeshMatr(RO_33, i))
+    end function Ro33PointConjg
+
+    function Ro12PointConjg(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = conjg(roMeshMatr(RO_12, i))
+    end function Ro12PointConjg
+
+    function Ro23PointConjg(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = -IMG_UNIT * conjg(Omega1(i)) * roMeshMatr(RO_12, i) / DeltaStroke21 &
+            + IMG_UNIT * conjg(Omega1(i)) * (conjg(roMeshMatr(RO_33, i)) - conjg(roMeshMatr(RO_11, i))) / DeltaStroke21
+    end function Ro23PointConjg
+
+    function Ro13PointConjg(roMeshMatr, i) result(retval)
+        implicit none
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        integer :: i
+        complex :: retval
+        
+        retval = -IMG_UNIT * conjg(Omega2(i)) * conjg(roMeshMatr(RO_12, i)) / DeltaStroke11 &
+            + IMG_UNIT * conjg(Omega1(i)) * (conjg(roMeshMatr(RO_33, i)) - conjg(roMeshMatr(RO_11, i))) / DeltaStroke11
+    end function Ro13PointConjg
 end module EquationSystemUtils

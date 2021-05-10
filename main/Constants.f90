@@ -42,5 +42,9 @@ module Constants
     complex, parameter :: DeltaGamma = IMG_UNIT * (Delta2 - Delta1) + (GParallel + q ** 2 * D12)
     complex, parameter :: DeltaGammaStroke = -IMG_UNIT * (Delta2 - Delta1) + (GParallel + q ** 2 * D12)
 
+    ! INTERNAL IMPLEMENTATION
     integer, parameter :: DEBUG = 1
+    integer, parameter :: RO_11 = 1, RO_22 = 2, RO_33 = 3, RO_12 = 4
+    integer, parameter :: MESH_DIM = 8 * (N + 1)
+    integer, parameter :: SYSTEM_VAR_NUM = 4
 end module Constants
