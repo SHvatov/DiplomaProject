@@ -10,8 +10,8 @@ contains
     ! in the auxiliary mesh.
     ! Params:
     ! - roMeshMatr - matrix with dimensions (1:SYSTEM_VAR_NUM, 0:MESH_DIM), which contains
-    ! the values of the functions Ro11, Ro22, Ro33, Ro12 in the points of the auxiliary mesh.
-    ! This values are used to calculate Ro23, Ro13, which then used to calculate the dicrepancy vector.
+    ! the values of the functions Ro11, Ro22, Ro33, Ro12, Ro11*, Ro22*, Ro33*, Ro12*, in the points of the auxiliary mesh.
+    ! This values are used to calculate Ro23, Ro13, Ro23*, Ro13*, which then used to calculate the dicrepancy vector.
     ! - psiVector - vector, which will contain the dicrepancy vector.
     subroutine calculateDiscrepancy(roMeshMatr, psiVector)
         implicit none
@@ -187,11 +187,6 @@ contains
         psiVector(8 * (N + 1) - 1) = rightConjg(2)
         psiVector(8 * (N + 1)) = rightConjg(3)
     end subroutine calculateDiscrepancy
-
-    subroutine calculateCoeffMatrix()
-        implicit none
-    
-    end subroutine calculateCoeffMatrix
 
     ! Helper functions, that are used to calculate left side of the equations
     function calculateA1(roMeshMatr, i) result(retval)
