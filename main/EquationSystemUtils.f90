@@ -3,10 +3,14 @@ module EquationSystemUtils
     use CommonFunctions
     
     implicit none
+    
+    ! Internal implementation details - indicies of the Ro elements in the matrix 
+    integer, parameter, private :: RO_11 = 1, RO_22 = 2, RO_33 = 3, RO_12 = 4
+    integer, parameter, private :: RO_11_CONJG = 5, RO_22_CONJG = 6, RO_33_CONJG = 7, RO_12_CONJG = 8
 contains
     function Ro23Point(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -16,7 +20,7 @@ contains
 
     function Ro13Point(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -26,7 +30,7 @@ contains
 
     function Ro11Point(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -35,7 +39,7 @@ contains
 
     function Ro22Point(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -44,7 +48,7 @@ contains
 
     function Ro33Point(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -53,7 +57,7 @@ contains
 
     function Ro12Point(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -62,7 +66,7 @@ contains
 
     function Ro11PointConjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -71,7 +75,7 @@ contains
 
     function Ro22PointConjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -80,7 +84,7 @@ contains
 
     function Ro33PointConjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -89,7 +93,7 @@ contains
 
     function Ro12PointConjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -98,7 +102,7 @@ contains
 
     function Ro23PointConjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -108,7 +112,7 @@ contains
 
     function Ro13PointConjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         

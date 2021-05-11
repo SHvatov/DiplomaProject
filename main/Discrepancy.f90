@@ -1,7 +1,6 @@
 module discrepancy
     use Constants
     use EquationSystemUtils
-    ! use Functions
     use VecMatrUtils
 
     implicit none
@@ -9,14 +8,14 @@ contains
     ! Calculates the dicrepancy vector based on the provided matrix of values of the functions 
     ! in the auxiliary mesh.
     ! Params:
-    ! - roMeshMatr - matrix with dimensions (1:SYSTEM_VAR_NUM, 0:MESH_DIM), which contains
+    ! - roMeshMatr - matrix with dimensions (1:SYSTEM_VAR_NUM, 0:N), which contains
     ! the values of the functions Ro11, Ro22, Ro33, Ro12, Ro11*, Ro22*, Ro33*, Ro12*, in the points of the auxiliary mesh.
     ! This values are used to calculate Ro23, Ro13, Ro23*, Ro13*, which then used to calculate the dicrepancy vector.
     ! - psiVector - vector, which will contain the dicrepancy vector.
     subroutine calculateDiscrepancy(roMeshMatr, psiVector)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
-        complex, dimension(1:8 * (N + 1)), intent(out) :: psiVector
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
+        complex, dimension(1:EXTENDED_MESH_DIM), intent(out) :: psiVector
         integer :: i
 
         ! DECLARATIONS
@@ -177,21 +176,21 @@ contains
         end do
 
         ! 8N + 1
-        psiVector(8 * (N + 1) - 7) = rightMain(0)
-        psiVector(8 * (N + 1) - 6) = rightMain(1)
-        psiVector(8 * (N + 1) - 5) = rightMain(2)
-        psiVector(8 * (N + 1) - 4) = rightMain(3)
+        psiVector(EXTENDED_MESH_DIM - 7) = rightMain(0)
+        psiVector(EXTENDED_MESH_DIM - 6) = rightMain(1)
+        psiVector(EXTENDED_MESH_DIM - 5) = rightMain(2)
+        psiVector(EXTENDED_MESH_DIM - 4) = rightMain(3)
 
-        psiVector(8 * (N + 1) - 3) = rightConjg(0)
-        psiVector(8 * (N + 1) - 2) = rightConjg(1)
-        psiVector(8 * (N + 1) - 1) = rightConjg(2)
-        psiVector(8 * (N + 1)) = rightConjg(3)
+        psiVector(EXTENDED_MESH_DIM - 3) = rightConjg(0)
+        psiVector(EXTENDED_MESH_DIM - 2) = rightConjg(1)
+        psiVector(EXTENDED_MESH_DIM - 1) = rightConjg(2)
+        psiVector(EXTENDED_MESH_DIM) = rightConjg(3)
     end subroutine calculateDiscrepancy
 
     ! Helper functions, that are used to calculate left side of the equations
     function calculateA1(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -206,7 +205,7 @@ contains
 
     function calculateA2(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -221,7 +220,7 @@ contains
 
     function calculateA3(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -237,7 +236,7 @@ contains
 
     function calculateA4(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -251,7 +250,7 @@ contains
 
     function calculateA1Conjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -266,7 +265,7 @@ contains
 
     function calculateA2Conjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -281,7 +280,7 @@ contains
 
     function calculateA3Conjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         
@@ -297,7 +296,7 @@ contains
 
     function calculateA4Conjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:MESH_DIM), intent(in) :: roMeshMatr
+        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
         complex :: retval
         

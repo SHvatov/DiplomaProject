@@ -42,10 +42,11 @@ module Constants
     complex, parameter :: DeltaGamma = IMG_UNIT * (Delta2 - Delta1) + (GParallel + q ** 2 * D12)
     complex, parameter :: DeltaGammaStroke = -IMG_UNIT * (Delta2 - Delta1) + (GParallel + q ** 2 * D12)
 
+    ! Dimensions of the matricies used in the project
+    integer, parameter :: SYSTEM_VAR_NUM = 8
+    integer, parameter :: EXTENDED_MESH_DIM = 8 * (N + 1)
+
+
     ! INTERNAL IMPLEMENTATION
     integer, parameter :: DEBUG = 1
-    integer, parameter :: RO_11 = 1, RO_22 = 2, RO_33 = 3, RO_12 = 4
-    integer, parameter :: RO_11_CONJG = 5, RO_22_CONJG = 6, RO_33_CONJG = 7, RO_12_CONJG = 8
-    integer, parameter :: MESH_DIM = 8 * (N + 1)
-    integer, parameter :: SYSTEM_VAR_NUM = 8
 end module Constants
