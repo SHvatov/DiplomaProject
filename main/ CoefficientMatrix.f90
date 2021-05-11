@@ -1,5 +1,6 @@
 module CoefficientMatrix
     use Discrepancy
+    use DebugConfig
 
     implicit none
 contains
@@ -21,41 +22,31 @@ contains
     
         ! Local variables
         integer :: j
-        complex, dimension(1:EXTENDED_MESH_DIM) :: psiVector, coeffMatrixJ
+        complex, dimension(1:EXTENDED_MESH_DIM) :: psiVector
         complex, dimension(1:EXTENDED_MESH_DIM) :: initialApproxPsiVector
         complex, dimension(1:SYSTEM_VAR_NUM, 0:N) :: deltaRoApproxMesh
 
         ! Calculate the discrepancy in the initial approximation
         call calculateDiscrepancy(initialRoApproxMesh, initialApproxPsiVector)
-        if (DEBUG == 1) then
+        if (DEBUG_DISC) then
             print *, "Discrepancy, initial approximation"
             call printComplexVectorSlice(initialApproxPsiVector, 1, EXTENDED_MESH_DIM)
         end if
 
         do j = 1, EXTENDED_MESH_DIM
-            ! Set the coeff matrix(*, i) to (0) vec 
-            coeffMatrixJ = (0, 0)
-
             ! Calculate the discrepancy
             call prepareDeltaApproximation(initialRoApproxMesh, delta, j, deltaRoApproxMesh)
             call calculateDiscrepancy(deltaRoApproxMesh, psiVector)
-            if (DEBUG == 1) then
+            if (DEBUG_DISC) then
                 print *, "Discrepancy, delta approximation, j = ", j
                 call printComplexVectorSlice(psiVector, 1, EXTENDED_MESH_DIM)
             end if
 
             ! Set the coeff matrix(*, i) using formula
-            coeffMatrixJ = (psiVector - initialApproxPsiVector) / delta
-            if (DEBUG == 1) then
-                print *, "A(*, J), j = ", j
-                call printComplexVectorSlice(coeffMatrixJ, 1, EXTENDED_MESH_DIM)
-            end if
-
-            ! Copy it to the ouput array
-            coeffMatrix(:, j) = coeffMatrixJ
+            coeffMatrix(:, j) = (psiVector - initialApproxPsiVector) / delta
         end do
 
-        if (DEBUG == 1) then
+        if (DEBUG_MATR) then
             print *, "A(*, *)"
             call printComplexMatrixSlice(coeffMatrix, 1, EXTENDED_MESH_DIM, 1, EXTENDED_MESH_DIM)
         end if
@@ -73,8 +64,12 @@ contains
         integer :: functionIterV, pointIterV, functionIndex, pointIndex
 
         ! Calculate the position of the point to add delta to
-        pointIndex = mod(i, SYSTEM_VAR_NUM)
+        pointIndex = i / SYSTEM_VAR_NUM
         functionIndex = i - pointIndex * SYSTEM_VAR_NUM
+
+        if (DEBUG_MATR_INDICIES) then
+            print *, "Index [", i, "] -> [func=", functionIndex, ",point=", pointIndex, "]"
+        end if
 
         ! Copy the matricies
         functionIter: do functionIterV = 1, SYSTEM_VAR_NUM

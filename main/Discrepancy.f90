@@ -1,5 +1,6 @@
 module discrepancy
     use Constants
+    use DebugConfig
     use EquationSystemUtils
     use VecMatrUtils
 
@@ -42,7 +43,7 @@ contains
         leftMain(3) = calculateA4(roMeshMatr, 0) * Hr / 4 &
             - D12 * (riPlusHalf(0) * (Ro12Point(roMeshMatr, 1) - Ro12Point(roMeshMatr, 0)) / Hr)
 
-        if (DEBUG == 1) then
+        if (DEBUG_DISC) then
             print *, "Discrepancy, left border"
             call printComplexVector(leftMain, 4)
         end if
@@ -56,7 +57,7 @@ contains
         leftConjg(3) = calculateA4Conjg(roMeshMatr, 0) * Hr / 4 &
             - D12 * (riPlusHalf(0) * (Ro12PointConjg(roMeshMatr, 1) - Ro12PointConjg(roMeshMatr, 0)) / Hr)
 
-        if (DEBUG == 1) then
+        if (DEBUG_DISC) then
             print *, "Discrepancy, left border, conjg"
             call printComplexVector(leftConjg, 4)
         end if
@@ -116,7 +117,7 @@ contains
                     )
         end do
 
-        if (DEBUG == 1) then
+        if (DEBUG_DISC) then
             print *, "Discrepancy, main equation system"
             call printComplexMatrixSlice(main, 0, 4, 1, N - 1)
 
@@ -130,7 +131,7 @@ contains
         rightMain(2) = -Ro33Point(roMeshMatr, N)
         rightMain(3) = -Ro12Point(roMeshMatr, N)
 
-        if (DEBUG == 1) then
+        if (DEBUG_DISC) then
             print *, "Discrepancy, right border"
             call printComplexVector(rightMain, 4)
         end if
@@ -140,7 +141,7 @@ contains
         rightConjg(2) = -Ro33PointConjg(roMeshMatr, N)
         rightConjg(3) = -Ro12PointConjg(roMeshMatr, N)
 
-        if (DEBUG == 1) then
+        if (DEBUG_DISC) then
             print *, "Discrepancy, right border, conjg"
             call printComplexVector(rightConjg, 4)
         end if
