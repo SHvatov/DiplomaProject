@@ -11,6 +11,6 @@ program main
     complex, dimension(1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM) :: coeffMatrix
 
     ! Calculate coeff matrix
-    coeffMatrix = 0
+    coeffMatrix = (0, 0)
     call prepareCoefficientMatrix(initialRoApproxMesh, delta, coeffMatrix)
 end program main

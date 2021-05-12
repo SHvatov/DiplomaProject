@@ -28,16 +28,34 @@ contains
 
         ! Calculate the discrepancy in the initial approximation
         call calculateDiscrepancy(initialRoApproxMesh, initialApproxPsiVector)
-        if (DEBUG_DISC) then
+        if (DEBUG_MATR) then
             print *, "Discrepancy, initial approximation"
             call printComplexVectorSlice(initialApproxPsiVector, 1, EXTENDED_MESH_DIM)
         end if
 
+        if (DEBUG_MATR) then
+            print *, "Initial approximation mesh"
+            call printComplexMatrixSlice(initialRoApproxMesh, 1, SYSTEM_VAR_NUM, 0, N)
+        end if
+
         do j = 1, EXTENDED_MESH_DIM
-            ! Calculate the discrepancy
+            ! Prepare delta approximation mesh
+            deltaRoApproxMesh = (0, 0)
+            if (DEBUG_MATR) then
+                print *, "Delta Approximation mesh before, j = ", j
+                call printComplexMatrixSlice(deltaRoApproxMesh, 1, SYSTEM_VAR_NUM, 0, N)
+            end if
+
             call prepareDeltaApproximation(initialRoApproxMesh, delta, j, deltaRoApproxMesh)
+            if (DEBUG_MATR) then
+                print *, "Delta Approximation mesh, j = ", j
+                call printComplexMatrixSlice(deltaRoApproxMesh, 1, SYSTEM_VAR_NUM, 0, N)
+            end if
+
+            ! Calculate discrepancy
+            psiVector = 0
             call calculateDiscrepancy(deltaRoApproxMesh, psiVector)
-            if (DEBUG_DISC) then
+            if (DEBUG_MATR) then
                 print *, "Discrepancy, delta approximation, j = ", j
                 call printComplexVectorSlice(psiVector, 1, EXTENDED_MESH_DIM)
             end if
@@ -50,7 +68,7 @@ contains
             end if
         end do
 
-        if (DEBUG_MATR) then
+        if (OUTPUT_MATR) then
             print *, "A(*, *)"
             call printComplexMatrixSlice(coeffMatrix, 1, EXTENDED_MESH_DIM, 1, EXTENDED_MESH_DIM)
         end if
@@ -71,7 +89,7 @@ contains
         pointIndex = i / SYSTEM_VAR_NUM
         functionIndex = i - pointIndex * SYSTEM_VAR_NUM
 
-        if (DEBUG_MATR_INDICIES) then
+        if (DEBUG_MATR) then
             print *, "Index [", i, "] -> [func=", functionIndex, ",point=", pointIndex, "]"
         end if
 

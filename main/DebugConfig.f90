@@ -9,5 +9,7 @@ module DebugConfig
 
     ! Debug matrix A calculation option
     logical, parameter :: DEBUG_MATR = DEBUG_ALL .and. .true.
-    logical, parameter :: DEBUG_MATR_INDICIES = DEBUG_ALL .and. .true.
+
+    ! Whether to print the matr or not
+    logical, parameter :: OUTPUT_MATR = .true.
 end module DebugConfig
