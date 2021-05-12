@@ -44,6 +44,10 @@ contains
 
             ! Set the coeff matrix(*, i) using formula
             coeffMatrix(:, j) = (psiVector - initialApproxPsiVector) / delta
+            if (DEBUG_MATR) then
+                print *, "A(*, J), j = ", j
+                call printComplexVectorSlice(coeffMatrix(:, j), 1, EXTENDED_MESH_DIM)
+            end if
         end do
 
         if (DEBUG_MATR) then

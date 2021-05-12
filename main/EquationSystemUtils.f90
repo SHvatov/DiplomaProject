@@ -106,8 +106,8 @@ contains
         integer :: i
         complex :: retval
         
-        retval = -IMG_UNIT * conjg(Omega1(i)) * Ro12Point(roMeshMatr, i) / DeltaStroke21 &
-            + IMG_UNIT * conjg(Omega1(i)) * (Ro33PointConjg(roMeshMatr, i) - Ro22PointConjg(roMeshMatr, i)) / DeltaStroke21
+        retval = -IMG_UNIT * conjg(Omega1(i)) * Ro12Point(roMeshMatr, i) / DeltaStroke22 &
+            + IMG_UNIT * conjg(Omega1(i)) * (Ro33PointConjg(roMeshMatr, i) - Ro22PointConjg(roMeshMatr, i)) / DeltaStroke22
     end function Ro23PointConjg
 
     function Ro13PointConjg(roMeshMatr, i) result(retval)
@@ -116,7 +116,7 @@ contains
         integer :: i
         complex :: retval
         
-        retval = -IMG_UNIT * conjg(Omega2(i)) * Ro12PointConjg(roMeshMatr, i) / DeltaStroke11 &
-            + IMG_UNIT * conjg(Omega1(i)) * (Ro33PointConjg(roMeshMatr, i) - Ro11PointConjg(roMeshMatr, i)) / DeltaStroke11
+        retval = -IMG_UNIT * conjg(Omega2(i)) * Ro12PointConjg(roMeshMatr, i) / DeltaStroke12 &
+            + IMG_UNIT * conjg(Omega1(i)) * (Ro33PointConjg(roMeshMatr, i) - Ro11PointConjg(roMeshMatr, i)) / DeltaStroke12
     end function Ro13PointConjg
 end module EquationSystemUtils

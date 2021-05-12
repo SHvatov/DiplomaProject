@@ -5,7 +5,7 @@ module DebugConfig
     logical, parameter :: DEBUG_ALL = .true.
 
     ! Debug discrepancy option
-    logical, parameter :: DEBUG_DISC = DEBUG_ALL .and. .false.
+    logical, parameter :: DEBUG_DISC = DEBUG_ALL .and. .true.
 
     ! Debug matrix A calculation option
     logical, parameter :: DEBUG_MATR = DEBUG_ALL .and. .true.

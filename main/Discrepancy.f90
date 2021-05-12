@@ -21,27 +21,27 @@ contains
 
         ! DECLARATIONS
         ! i = 0
-        complex, dimension(0:4) :: leftMain
-        complex, dimension(0:4) :: leftConjg
+        complex, dimension(0:3) :: leftMain
+        complex, dimension(0:3) :: leftConjg
         
         ! i = [1; Nr - 1]
-        complex, dimension(0:4, 1:N-1) :: main
-        complex, dimension(0:4, 1:N-1) :: mainConjg
+        complex, dimension(0:3, 1:N-1) :: main
+        complex, dimension(0:3, 1:N-1) :: mainConjg
 
         ! i = Nr
-        complex, dimension(0:4) :: rightMain
-        complex, dimension(0:4) :: rightConjg
+        complex, dimension(0:3) :: rightMain
+        complex, dimension(0:3) :: rightConjg
 
         ! EQUATIONS
         ! i = 0
         leftMain(0) = calculateA1(roMeshMatr, 0) * Hr / 4 &
-            - D11 * (riPlusHalf(0) * (Ro11Point(roMeshMatr, 1) - Ro11Point(roMeshMatr, 0)) / Hr)
+            - D11 *  (Ro11Point(roMeshMatr, 1) - Ro11Point(roMeshMatr, 0)) / Hr
         leftMain(1) = calculateA2(roMeshMatr, 0) * Hr / 4 &
-            - D22 * (riPlusHalf(0) * (Ro22Point(roMeshMatr, 1) - Ro22Point(roMeshMatr, 0)) / Hr)
+            - D22 * (Ro22Point(roMeshMatr, 1) - Ro22Point(roMeshMatr, 0)) / Hr
         leftMain(2) = calculateA3(roMeshMatr, 0) * Hr / 4 &
-            - D33 * (riPlusHalf(0) * (Ro33Point(roMeshMatr, 1) - Ro33Point(roMeshMatr, 0)) / Hr)
+            - D33 * (Ro33Point(roMeshMatr, 1) - Ro33Point(roMeshMatr, 0)) / Hr
         leftMain(3) = calculateA4(roMeshMatr, 0) * Hr / 4 &
-            - D12 * (riPlusHalf(0) * (Ro12Point(roMeshMatr, 1) - Ro12Point(roMeshMatr, 0)) / Hr)
+            - D12 * (Ro12Point(roMeshMatr, 1) - Ro12Point(roMeshMatr, 0)) / Hr
 
         if (DEBUG_DISC) then
             print *, "Discrepancy, left border"
@@ -49,13 +49,13 @@ contains
         end if
 
         leftConjg(0) = calculateA1Conjg(roMeshMatr, 0) * Hr / 4 &
-            - D11 * (riPlusHalf(0) * (Ro11PointConjg(roMeshMatr, 1) - Ro11PointConjg(roMeshMatr, 0)) / Hr)
+            - D11 * (Ro11PointConjg(roMeshMatr, 1) - Ro11PointConjg(roMeshMatr, 0)) / Hr
         leftConjg(1) = calculateA2Conjg(roMeshMatr, 0) * Hr / 4 &
-            - D22 * (riPlusHalf(0) * (Ro22PointConjg(roMeshMatr, 1) - Ro22PointConjg(roMeshMatr, 0)) / Hr)
+            - D22 * (Ro22PointConjg(roMeshMatr, 1) - Ro22PointConjg(roMeshMatr, 0)) / Hr
         leftConjg(2) = calculateA3Conjg(roMeshMatr, 0) * Hr / 4 &
-            - D33 * (riPlusHalf(0) * (Ro33PointConjg(roMeshMatr, 1) - Ro33PointConjg(roMeshMatr, 0)) / Hr)
+            - D33 * (Ro33PointConjg(roMeshMatr, 1) - Ro33PointConjg(roMeshMatr, 0)) / Hr
         leftConjg(3) = calculateA4Conjg(roMeshMatr, 0) * Hr / 4 &
-            - D12 * (riPlusHalf(0) * (Ro12PointConjg(roMeshMatr, 1) - Ro12PointConjg(roMeshMatr, 0)) / Hr)
+            - D12 * (Ro12PointConjg(roMeshMatr, 1) - Ro12PointConjg(roMeshMatr, 0)) / Hr
 
         if (DEBUG_DISC) then
             print *, "Discrepancy, left border, conjg"
@@ -167,13 +167,13 @@ contains
             ! 8N - 4
             psiVector(8 * i + 4) = main(3, i)
             ! 8N - 3
-            psiVector(8 * i + 5) = mainConjg(1, i)
+            psiVector(8 * i + 5) = mainConjg(0, i)
             ! 8N - 2
-            psiVector(8 * i + 6) = mainConjg(2, i)
+            psiVector(8 * i + 6) = mainConjg(1, i)
             ! 8N - 1
-            psiVector(8 * i + 7) = mainConjg(3, i)
+            psiVector(8 * i + 7) = mainConjg(2, i)
             ! 8N - 0
-            psiVector(8 * i + 8) = mainConjg(4, i)
+            psiVector(8 * i + 8) = mainConjg(3, i)
         end do
 
         ! 8N + 1
@@ -229,7 +229,7 @@ contains
             ( &
                 IMG_UNIT * Omega1Conjg(i) * Ro13Point(roMeshMatr, i) &
                 - IMG_UNIT * Omega1(i) * Ro13PointConjg(roMeshMatr, i) &
-                + IMG_UNIT * Omega2(i) * Ro23Point(roMeshMatr, i) &
+                + IMG_UNIT * Omega2Conjg(i) * Ro23Point(roMeshMatr, i) &
                 - IMG_UNIT * Omega2(i) * Ro23PointConjg(roMeshMatr, i) &
                 + Gamma * Ro33Point(roMeshMatr, i) &
             )
@@ -288,10 +288,10 @@ contains
         retval = & 
             ( &
                 - IMG_UNIT * Omega1(i) * Ro13PointConjg(roMeshMatr, i) &
-                + IMG_UNIT * Omega1Conjg(i) * Ro13PointConjg(roMeshMatr, i) &
-                - IMG_UNIT * Omega2Conjg(i) * Ro23PointConjg(roMeshMatr, i) &
+                + IMG_UNIT * Omega1Conjg(i) * Ro13Point(roMeshMatr, i) &
+                - IMG_UNIT * Omega2(i) * Ro23PointConjg(roMeshMatr, i) &
                 + IMG_UNIT * Omega2Conjg(i) * Ro23Point(roMeshMatr, i) &
-                + Gamma * Ro33Point(roMeshMatr, i) &
+                + Gamma * Ro33PointConjg(roMeshMatr, i) &
             )
     end function calculateA3Conjg
 
@@ -303,7 +303,7 @@ contains
         
         retval = &
             ( &
-                DeltaGamma * Ro12Point(roMeshMatr, i) &
+                DeltaGamma * Ro12PointConjg(roMeshMatr, i) &
                 + IMG_UNIT * Omega2(i) * Ro13PointConjg(roMeshMatr, i) &
                 - IMG_UNIT * Omega1Conjg(i) * Ro23Point(roMeshMatr, i) &
             )
