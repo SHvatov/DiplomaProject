@@ -55,4 +55,31 @@ contains
             end do columnloop
         end do rowloop
     end subroutine printComplexMatrixSlice
+
+    ! Analogs, which print only numbers with specific format
+    subroutine printComplexVectorSliceFmt(vec, from, to)
+        implicit none
+        complex, dimension(from:to), intent(in) :: vec
+        integer, intent(in) :: from, to
+
+        integer :: i
+        do i = from, to
+            print *, "fmt_vec[", i, "]"
+            print "(2x,2es10.2)", vec(i)
+        end do
+    end subroutine printComplexVectorSliceFmt
+
+    subroutine printComplexMatrixSliceFmt(matr, fromRow, toRow, fromColumn, toColumn)
+        implicit none
+        complex, dimension(fromRow:toRow,fromColumn:toColumn), intent(in) :: matr
+        integer, intent(in) :: fromRow, toRow, fromColumn, toColumn
+
+        integer :: i, j
+        rowloop: do i = fromRow, toRow
+            columnloop: do j = fromColumn, toColumn
+            print *, "fmt_matr[", i, ",", j, "]"
+            print "(2x,2es10.2)", matr(i, j)
+            end do columnloop
+        end do rowloop
+    end subroutine printComplexMatrixSliceFmt
 end module VecMatrUtils

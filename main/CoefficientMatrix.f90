@@ -11,8 +11,8 @@ contains
     ! - initialRoApproxMesh - matrix with dimensions (1:SYSTEM_VAR_NUM, 0:N), which contains
     ! the initial approximation of the functions Ro11, Ro22, Ro33, Ro12, Ro11*, Ro22*, Ro33*, Ro12*.
     ! - delta - DELTA value
-    ! - coeffMatrix - aoutput matrix with dimensions (1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM), which will contain
-    ! the coefficients of the matrix A.
+    ! - coeffMatrix - output matrix with dimensions (1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM),
+    ! which will contain the coefficients of the matrix A.
     subroutine prepareCoefficientMatrix(initialRoApproxMesh, delta, coeffMatrix)
         implicit none
         ! Arguments
