@@ -4,11 +4,11 @@ module RoFunctions
     implicit none
 contains
     ! RO Functions.
-    ! Returns the complex result of the RO function in the point (r[i]).
+    ! Returns the complex(16) result of the RO function in the point (r[i]).
     function Ro11(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = (0, 0)
     end function Ro11
@@ -16,7 +16,7 @@ contains
     function Ro11Conjg(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = conjg(Ro11(i))
     end function Ro11Conjg
@@ -24,7 +24,7 @@ contains
     function Ro22(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = (0, 0)
     end function Ro22
@@ -32,7 +32,7 @@ contains
     function Ro22Conjg(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = conjg(Ro22(i))
     end function Ro22Conjg
@@ -40,7 +40,7 @@ contains
     function Ro33(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = (0, 0)
     end function Ro33
@@ -48,7 +48,7 @@ contains
     function Ro33Conjg(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = conjg(Ro33(i))
     end function Ro33Conjg
@@ -56,7 +56,7 @@ contains
     function Ro12(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = (0, 0)
     end function Ro12
@@ -64,7 +64,7 @@ contains
     function Ro12Conjg(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = conjg(Ro12(i))
     end function Ro12Conjg
@@ -75,7 +75,7 @@ contains
     function Ro13(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = IMG_UNIT * Omega2(i) * Ro12(i) / DeltaStroke11 &
             - IMG_UNIT * Omega1(i) * (Ro33(i) - Ro11(i)) / DeltaStroke11
@@ -84,7 +84,7 @@ contains
     function Ro13Conjg(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = -IMG_UNIT * conjg(Omega2(i)) * conjg(Ro12(i)) / DeltaStroke12 &
             + IMG_UNIT * conjg(Omega1(i)) * (conjg(Ro33(i)) - conjg(Ro11(i))) / DeltaStroke12
@@ -93,7 +93,7 @@ contains
     function Ro23(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = IMG_UNIT * Omega1(i) * conjg(Ro12(i)) / DeltaStroke21 &
             - IMG_UNIT * Omega1(i) * (Ro33(i) - Ro11(i)) / DeltaStroke21
@@ -102,7 +102,7 @@ contains
     function Ro23Conjg(i) result (retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = -IMG_UNIT * conjg(Omega1(i)) * Ro12(i) / DeltaStroke22 &
             + IMG_UNIT * conjg(Omega1(i)) * (conjg(Ro33(i)) - conjg(Ro11(i))) / DeltaStroke22

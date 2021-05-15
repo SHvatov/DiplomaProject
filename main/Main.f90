@@ -8,15 +8,15 @@ program main
     implicit none
 
     ! Local variables
-    complex :: delta = (1, 0)
-    complex, dimension(1:SYSTEM_VAR_NUM, 0:N)  :: initialRoApproxMesh
-    complex, dimension(1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM) :: matrixA
-    complex, dimension(1:EXTENDED_MESH_DIM) :: vectorB
+    complex(16) :: delta = (1, 0)
+    complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N)  :: initialRoApproxMesh
+    complex(16), dimension(1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM) :: matrixA
+    complex(16), dimension(1:EXTENDED_MESH_DIM) :: vectorB
 
     ! Util variables for z*
-    complex, dimension(1:EXTENDED_MESH_DIM) :: z = 0
+    complex(16), dimension(1:EXTENDED_MESH_DIM) :: z = 0
     integer, dimension(1:EXTENDED_MESH_DIM) :: ipvt = 0
-    real :: rcond
+    real(8) :: rcond
 
     ! Calculate coeff matrix
     matrixA = (0, 0)
@@ -43,19 +43,19 @@ program main
     end if
 
     ! First call zgeco / zgefa
-    ! call zgeco(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, rcond, z)
-    ! if (DEBUG_MAIN) then
-    !     print *, "R Cond"
-    !     print *, rcond
-    ! end if
+    call zgeco(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, rcond, z)
+    if (DEBUG_MAIN) then
+        print *, "R Cond"
+        print *, rcond
+    end if
 
     ! Then call zgesl
     ! call zgesl(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, vectorB, 0)
-    ! if (DEBUG_MAIN) then
-    !     print *, "Solution(*)"
-    !     call printComplexVectorSlice(vectorB, 1, EXTENDED_MESH_DIM)
+    if (DEBUG_MAIN) then
+        print *, "Solution(*)"
+        call printComplexVectorSlice(vectorB, 1, EXTENDED_MESH_DIM)
 
-    !     print *, "Solution_formatted(*)"
-    !     call printComplexVectorSliceFmt(vectorB, 1, EXTENDED_MESH_DIM)
-    ! end if
+        print *, "Solution_formatted(*)"
+        call printComplexVectorSliceFmt(vectorB, 1, EXTENDED_MESH_DIM)
+    end if
 end program main

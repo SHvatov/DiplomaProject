@@ -8,7 +8,7 @@ contains
     function ri(i) result (retval)
         implicit none
         integer :: i
-        real :: retval
+        real(8) :: retval
         
         retval = Hr * i
     end function ri
@@ -18,7 +18,7 @@ contains
     function riPlusHalf(i) result (retval)
         implicit none
         integer :: i
-        real :: retval
+        real(8) :: retval
 
         retval = ri(i) + Hr / 2
     end function riPlusHalf
@@ -28,17 +28,17 @@ contains
     function riMinusHalf(i) result (retval)
         implicit none
         integer :: i
-        real :: retval
+        real(8) :: retval
 
         retval = ri(i) - Hr / 2
     end function riMinusHalf
 
     ! Omega CommonFunctions.
-    ! Returns the complex result of the Omega function in the point (r[i]).
+    ! Returns the complex(16) result of the Omega function in the point (r[i]).
     function Omega1(i) result(retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = C1 * e ** (ri(i) / a)
     end function Omega1
@@ -46,7 +46,7 @@ contains
     function Omega1Conjg(i) result(retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = conjg(Omega1(i))
     end function Omega1Conjg
@@ -54,7 +54,7 @@ contains
     function Omega2(i) result(retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = C2 * e ** (ri(i) / a)
     end function Omega2
@@ -62,7 +62,7 @@ contains
     function Omega2Conjg(i) result(retval)
         implicit none
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = conjg(Omega2(i))
     end function Omega2Conjg

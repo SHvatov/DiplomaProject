@@ -1,13 +1,13 @@
 module VecMatrUtils
     implicit none
 contains
-    ! Prints the provided vector of complex type (vec) and specified length (L).
+    ! Prints the provided vector of complex(16) type (vec) and specified length (L).
     ! Note: 
     ! - procedure does not check the boundaries
     ! - vector is expected to start with 0 index
     subroutine printComplexVector(vec, L)
         implicit none
-        complex, dimension(0:L), intent(in) :: vec
+        complex(16), dimension(0:L), intent(in) :: vec
         integer, intent(in) :: L
 
         integer :: i
@@ -19,7 +19,7 @@ contains
     ! Does the same as printComplexVector but for matricies [L * K]
     subroutine printComplexMatrix(matr, L, K)
         implicit none
-        complex, dimension(0:L, 0:K), intent(in) :: matr
+        complex(16), dimension(0:L, 0:K), intent(in) :: matr
         integer, intent(in) :: L, K
 
         integer :: i, j
@@ -34,7 +34,7 @@ contains
     ! allows to print the slices from the vectors and matricies.
     subroutine printComplexVectorSlice(vec, from, to)
         implicit none
-        complex, dimension(from:to), intent(in) :: vec
+        complex(16), dimension(from:to), intent(in) :: vec
         integer, intent(in) :: from, to
 
         integer :: i
@@ -45,7 +45,7 @@ contains
 
     subroutine printComplexMatrixSlice(matr, fromRow, toRow, fromColumn, toColumn)
         implicit none
-        complex, dimension(fromRow:toRow,fromColumn:toColumn), intent(in) :: matr
+        complex(16), dimension(fromRow:toRow,fromColumn:toColumn), intent(in) :: matr
         integer, intent(in) :: fromRow, toRow, fromColumn, toColumn
 
         integer :: i, j
@@ -59,7 +59,7 @@ contains
     ! Analogs, which print only numbers with specific format
     subroutine printComplexVectorSliceFmt(vec, from, to)
         implicit none
-        complex, dimension(from:to), intent(in) :: vec
+        complex(16), dimension(from:to), intent(in) :: vec
         integer, intent(in) :: from, to
 
         integer :: i
@@ -71,7 +71,7 @@ contains
 
     subroutine printComplexMatrixSliceFmt(matr, fromRow, toRow, fromColumn, toColumn)
         implicit none
-        complex, dimension(fromRow:toRow,fromColumn:toColumn), intent(in) :: matr
+        complex(16), dimension(fromRow:toRow,fromColumn:toColumn), intent(in) :: matr
         integer, intent(in) :: fromRow, toRow, fromColumn, toColumn
 
         integer :: i, j

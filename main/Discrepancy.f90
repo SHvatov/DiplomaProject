@@ -15,22 +15,22 @@ contains
     ! - psiVector - vector, which will contain the dicrepancy vector.
     subroutine calculateDiscrepancy(roMeshMatr, psiVector)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
-        complex, dimension(1:EXTENDED_MESH_DIM), intent(out) :: psiVector
+        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
+        complex(16), dimension(1:EXTENDED_MESH_DIM), intent(out) :: psiVector
         integer :: i
 
         ! DECLARATIONS
         ! i = 0
-        complex, dimension(0:3) :: leftMain
-        complex, dimension(0:3) :: leftConjg
+        complex(16), dimension(0:3) :: leftMain
+        complex(16), dimension(0:3) :: leftConjg
         
         ! i = [1; Nr - 1]
-        complex, dimension(0:3, 1:N-1) :: main
-        complex, dimension(0:3, 1:N-1) :: mainConjg
+        complex(16), dimension(0:3, 1:N-1) :: main
+        complex(16), dimension(0:3, 1:N-1) :: mainConjg
 
         ! i = Nr
-        complex, dimension(0:3) :: rightMain
-        complex, dimension(0:3) :: rightConjg
+        complex(16), dimension(0:3) :: rightMain
+        complex(16), dimension(0:3) :: rightConjg
 
         ! EQUATIONS
         ! i = 0
@@ -191,9 +191,9 @@ contains
     ! Helper functions, that are used to calculate left side of the equations
     function calculateA1(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
+        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = & 
             ( &
@@ -206,9 +206,9 @@ contains
 
     function calculateA2(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
+        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = & 
             ( &
@@ -221,9 +221,9 @@ contains
 
     function calculateA3(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
+        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = & 
             ( &
@@ -237,9 +237,9 @@ contains
 
     function calculateA4(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
+        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = & 
             ( &
@@ -251,9 +251,9 @@ contains
 
     function calculateA1Conjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
+        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = &
             ( &
@@ -266,9 +266,9 @@ contains
 
     function calculateA2Conjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
+        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = & 
             ( &
@@ -281,9 +281,9 @@ contains
 
     function calculateA3Conjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
+        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = & 
             ( &
@@ -297,9 +297,9 @@ contains
 
     function calculateA4Conjg(roMeshMatr, i) result(retval)
         implicit none
-        complex, dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
+        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: roMeshMatr
         integer :: i
-        complex :: retval
+        complex(16) :: retval
         
         retval = &
             ( &
