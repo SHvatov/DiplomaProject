@@ -14,6 +14,6 @@ gfortran -C \
     ../main/linpack/zgesl.F \
     ../main/Main.f90 -o main.out
 ./main.out > log.txt
-python3 matrix_printer.py ./log.txt 40 False > matrix.txt
+python3 matrix_printer.py ./log.txt 40 True > matrix.txt
 rm *.mod
 rm *.out
