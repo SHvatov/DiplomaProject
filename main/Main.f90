@@ -13,6 +13,11 @@ program main
     complex, dimension(1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM) :: matrixA
     complex, dimension(1:EXTENDED_MESH_DIM) :: vectorB
 
+    ! Util variables for z*
+    complex, dimension(1:EXTENDED_MESH_DIM) :: z = 0
+    integer, dimension(1:EXTENDED_MESH_DIM) :: ipvt = 0
+    real :: rcond
+
     ! Calculate coeff matrix
     matrixA = (0, 0)
     initialRoApproxMesh = 0
@@ -37,5 +42,20 @@ program main
         call printComplexVectorSliceFmt(vectorB, 1, EXTENDED_MESH_DIM)
     end if
 
-    
+    ! First call zgeco / zgefa
+    ! call zgeco(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, rcond, z)
+    ! if (DEBUG_MAIN) then
+    !     print *, "R Cond"
+    !     print *, rcond
+    ! end if
+
+    ! Then call zgesl
+    ! call zgesl(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, vectorB, 0)
+    ! if (DEBUG_MAIN) then
+    !     print *, "Solution(*)"
+    !     call printComplexVectorSlice(vectorB, 1, EXTENDED_MESH_DIM)
+
+    !     print *, "Solution_formatted(*)"
+    !     call printComplexVectorSliceFmt(vectorB, 1, EXTENDED_MESH_DIM)
+    ! end if
 end program main
