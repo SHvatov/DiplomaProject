@@ -9,9 +9,9 @@ gfortran -C \
     ../main/CoefficientMatrix.f90 \
     ../main/System.f90 \
     ../main/BLAS-3.8.0/*.f \
-    ../main/zgeco.F \
-    ../main/zgefa.F \
-    ../main/zgesl.F \
+    ../main/linpack/zgeco.F \
+    ../main/linpack/zgefa.F \
+    ../main/linpack/zgesl.F \
     ../main/Main.f90 -o main.out
 ./main.out > log.txt
 python3 matrix_printer.py ./log.txt 40 False > matrix.txt
