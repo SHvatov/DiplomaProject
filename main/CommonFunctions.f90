@@ -30,7 +30,7 @@ contains
         integer :: i
         real :: retval
 
-        retval = ri(i) + Hr / 2
+        retval = ri(i) - Hr / 2
     end function riMinusHalf
 
     ! Omega CommonFunctions.
