@@ -316,7 +316,7 @@ LB*(4) - independent variables:
  0
 ------------------------------------------
 ******************************************
-Right boundaries:
+Main boundaries:
 Checked variables:
 Ro11[i] <=> ro_11[i]
 Ro11[i+1] <=> ro_11[i + 1]
