@@ -34,28 +34,28 @@ contains
 
         ! EQUATIONS
         ! i = 0
-        leftMain(0) = calculateA1(roMeshMatr, 0) * Hr / 4 &
-            - D11 *  (Ro11Point(roMeshMatr, 1) - Ro11Point(roMeshMatr, 0)) / Hr
-        leftMain(1) = calculateA2(roMeshMatr, 0) * Hr / 4 &
-            - D22 * (Ro22Point(roMeshMatr, 1) - Ro22Point(roMeshMatr, 0)) / Hr
-        leftMain(2) = calculateA3(roMeshMatr, 0) * Hr / 4 &
-            - D33 * (Ro33Point(roMeshMatr, 1) - Ro33Point(roMeshMatr, 0)) / Hr
-        leftMain(3) = calculateA4(roMeshMatr, 0) * Hr / 4 &
-            - D12 * (Ro12Point(roMeshMatr, 1) - Ro12Point(roMeshMatr, 0)) / Hr
+        leftMain(0) = calculateA1(roMeshMatr, 0) * Hr / 4 * riPlusHalf(0) &
+            - D11 *  (Ro11Point(roMeshMatr, 1) - Ro11Point(roMeshMatr, 0)) / Hr * riPlusHalf(0)
+        leftMain(1) = calculateA2(roMeshMatr, 0) * Hr / 4 * riPlusHalf(0) &
+            - D22 * (Ro22Point(roMeshMatr, 1) - Ro22Point(roMeshMatr, 0)) / Hr * riPlusHalf(0)
+        leftMain(2) = calculateA3(roMeshMatr, 0) * Hr / 4 * riPlusHalf(0) &
+            - D33 * (Ro33Point(roMeshMatr, 1) - Ro33Point(roMeshMatr, 0)) / Hr * riPlusHalf(0)
+        leftMain(3) = calculateA4(roMeshMatr, 0) * Hr / 4 * riPlusHalf(0) &
+            - D12 * (Ro12Point(roMeshMatr, 1) - Ro12Point(roMeshMatr, 0)) / Hr * riPlusHalf(0)
 
         if (DEBUG_DISC) then
             print *, "Discrepancy, left border"
             call printComplexVector(leftMain, 4)
         end if
 
-        leftConjg(0) = calculateA1Conjg(roMeshMatr, 0) * Hr / 4 &
-            - D11 * (Ro11PointConjg(roMeshMatr, 1) - Ro11PointConjg(roMeshMatr, 0)) / Hr
-        leftConjg(1) = calculateA2Conjg(roMeshMatr, 0) * Hr / 4 &
-            - D22 * (Ro22PointConjg(roMeshMatr, 1) - Ro22PointConjg(roMeshMatr, 0)) / Hr
-        leftConjg(2) = calculateA3Conjg(roMeshMatr, 0) * Hr / 4 &
-            - D33 * (Ro33PointConjg(roMeshMatr, 1) - Ro33PointConjg(roMeshMatr, 0)) / Hr
-        leftConjg(3) = calculateA4Conjg(roMeshMatr, 0) * Hr / 4 &
-            - D12 * (Ro12PointConjg(roMeshMatr, 1) - Ro12PointConjg(roMeshMatr, 0)) / Hr
+        leftConjg(0) = calculateA1Conjg(roMeshMatr, 0) * Hr / 4 * riPlusHalf(0) &
+            - D11 * (Ro11PointConjg(roMeshMatr, 1) - Ro11PointConjg(roMeshMatr, 0)) / Hr * riPlusHalf(0)
+        leftConjg(1) = calculateA2Conjg(roMeshMatr, 0) * Hr / 4 * riPlusHalf(0) &
+            - D22 * (Ro22PointConjg(roMeshMatr, 1) - Ro22PointConjg(roMeshMatr, 0)) / Hr * riPlusHalf(0)
+        leftConjg(2) = calculateA3Conjg(roMeshMatr, 0) * Hr / 4 * riPlusHalf(0) &
+            - D33 * (Ro33PointConjg(roMeshMatr, 1) - Ro33PointConjg(roMeshMatr, 0)) / Hr * riPlusHalf(0)
+        leftConjg(3) = calculateA4Conjg(roMeshMatr, 0) * Hr / 4 * riPlusHalf(0) &
+            - D12 * (Ro12PointConjg(roMeshMatr, 1) - Ro12PointConjg(roMeshMatr, 0)) / Hr * riPlusHalf(0)
 
         if (DEBUG_DISC) then
             print *, "Discrepancy, left border, conjg"
