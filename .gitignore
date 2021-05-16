@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+# PyCharm data
+AnalyticsJacobian/__pycache__
+AnalyticsJacobian/.idea
+AnalyticsJacobian/venv
