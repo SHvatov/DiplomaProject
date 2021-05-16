@@ -193,7 +193,7 @@ def print_right_boundaries() -> None:
 
 
 def print_main_boundaries() -> None:
-    print("Right boundaries:")
+    print("Main boundaries:")
 
     ro_11_i, ro_11_i_plus_1, ro_11_i_minus_1 = get_ro_func("11")
     ro_22_i, ro_22_i_plus_1, ro_22_i_minus_1 = get_ro_func("22")
