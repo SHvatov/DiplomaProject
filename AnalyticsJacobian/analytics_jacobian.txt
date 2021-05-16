@@ -318,48 +318,48 @@ LB*(4) - independent variables:
 ******************************************
 Right boundaries:
 Checked variables:
-Ro11[i] <=> ro_11[None]
+Ro11[i] <=> ro_11[i]
 Ro11[i+1] <=> ro_11[i + 1]
 Ro11[i-1] <=> ro_11[i - 1]
-Ro11*[i] <=> ro_11[None]_c
+Ro11*[i] <=> ro_11[i]_c
 Ro11*[i+1] <=> ro_11[i + 1]_c
 Ro11*[i-1] <=> ro_11[i - 1]_c
-Ro22[i] <=> ro_22[None]
+Ro22[i] <=> ro_22[i]
 Ro22[i+1] <=> ro_22[i + 1]
 Ro22[i-1] <=> ro_22[i - 1]
-Ro22*[i] <=> ro_22[None]_c
+Ro22*[i] <=> ro_22[i]_c
 Ro22*[i+1] <=> ro_22[i + 1]_c
 Ro22*[i-1] <=> ro_22[i - 1]_c
-Ro33[i] <=> ro_33[None]
+Ro33[i] <=> ro_33[i]
 Ro33[i+1] <=> ro_33[i + 1]
 Ro33[i-1] <=> ro_33[i - 1]
-Ro33*[i] <=> ro_33[None]_c
+Ro33*[i] <=> ro_33[i]_c
 Ro33*[i+1] <=> ro_33[i + 1]_c
 Ro33*[i-1] <=> ro_33[i - 1]_c
-Ro12[i] <=> ro_12[None]
+Ro12[i] <=> ro_12[i]
 Ro12[i+1] <=> ro_12[i + 1]
 Ro12[i-1] <=> ro_12[i - 1]
-Ro12*[i] <=> ro_12[None]_c
+Ro12*[i] <=> ro_12[i]_c
 Ro12*[i+1] <=> ro_12[i + 1]_c
 Ro12*[i-1] <=> ro_12[i - 1]_c
 
 
 MAIN(1): 
- d_11*(r[i + 0.5]*(ro_11[i + 1] - ro_11[i])/hr - r[i - 0.5]*(-ro_11[i - 1] + ro_11[i])/hr) - hr*r[None]*(I*omega_1[i]*(I*omega_1[i]_c*(-ro_11[i]_c + ro_33[i]_c)/(-I*delta_1 + gamma') - I*omega_2[i]_c*ro_12[i]_c/(-I*delta_1 + gamma')) - I*omega_1[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) + g_parallel*(ro_11[i] - ro_22[i]) - gamma_31*ro_33[i])
+ d_11*(r[i + 0.5]*(ro_11[i + 1] - ro_11[i])/hr - r[i - 0.5]*(-ro_11[i - 1] + ro_11[i])/hr) - hr*r[i]*(I*omega_1[i]*(I*omega_1[i]_c*(-ro_11[i]_c + ro_33[i]_c)/(-I*delta_1 + gamma') - I*omega_2[i]_c*ro_12[i]_c/(-I*delta_1 + gamma')) - I*omega_1[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) + g_parallel*(ro_11[i] - ro_22[i]) - gamma_31*ro_33[i])
 MAIN(1) - Ro11[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(I*delta_1 + gamma') - d_11*r[i + 0.5]/hr - d_11*r[i - 0.5]/hr - g_parallel*hr*r[i]
 MAIN(1) - Ro11[i+1] coefficient: 
  d_11*r[i + 0.5]/hr
 MAIN(1) - Ro11[i-1] coefficient: 
  d_11*r[i - 0.5]/hr
 MAIN(1) - Ro11*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_1 + gamma')
 MAIN(1) - Ro11*[i+1] coefficient: 
  0
 MAIN(1) - Ro11*[i-1] coefficient: 
  0
 MAIN(1) - Ro22[i] coefficient: 
- 0
+ g_parallel*hr*r[i]
 MAIN(1) - Ro22[i+1] coefficient: 
  0
 MAIN(1) - Ro22[i-1] coefficient: 
@@ -371,36 +371,36 @@ MAIN(1) - Ro22*[i+1] coefficient:
 MAIN(1) - Ro22*[i-1] coefficient: 
  0
 MAIN(1) - Ro33[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(I*delta_1 + gamma') + gamma_31*hr*r[i]
 MAIN(1) - Ro33[i+1] coefficient: 
  0
 MAIN(1) - Ro33[i-1] coefficient: 
  0
 MAIN(1) - Ro33*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_1 + gamma')
 MAIN(1) - Ro33*[i+1] coefficient: 
  0
 MAIN(1) - Ro33*[i-1] coefficient: 
  0
 MAIN(1) - Ro12[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(I*delta_1 + gamma')
 MAIN(1) - Ro12[i+1] coefficient: 
  0
 MAIN(1) - Ro12[i-1] coefficient: 
  0
 MAIN(1) - Ro12*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(-I*delta_1 + gamma')
 MAIN(1) - Ro12*[i+1] coefficient: 
  0
 MAIN(1) - Ro12*[i-1] coefficient: 
  0
 MAIN(1) - independent variables: 
- (I**2*hr**2*omega_1[i]*r[None]*(I*delta_1 + gamma')*(-omega_1[i]_c*ro_11[i]_c + omega_1[i]_c*ro_33[i]_c - omega_2[i]_c*ro_12[i]_c) + I**2*hr**2*omega_1[i]_c*r[None]*(I*delta_1 - gamma')*(omega_1[i]*ro_11[i] - omega_1[i]*ro_33[i] + omega_2[i]*ro_12[i]) - d_11*ro_11[i]*(r[i + 0.5] + r[i - 0.5])*(I*delta_1 - gamma')*(I*delta_1 + gamma') + hr**2*r[None]*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(-g_parallel*ro_11[i] + g_parallel*ro_22[i] + gamma_31*ro_33[i]))/(hr*(I*delta_1 - gamma')*(I*delta_1 + gamma'))
+ 0
 ------------------------------------------
 MAIN(2): 
- d_22*(r[i + 0.5]*(ro_22[i + 1] - ro_22[i])/hr - r[i - 0.5]*(-ro_22[i - 1] + ro_22[i])/hr) - hr*r[None]*(I*omega_2[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) - I*omega_2[i]_c*(I*omega_1[i]*ro_12[i]_c/(I*delta_2 + gamma') - I*omega_1[i]*(-ro_22[i] + ro_33[i])/(I*delta_2 + gamma')) + g_parallel*(-ro_11[i] + ro_22[i]) - gamma_32*ro_33[i])
+ d_22*(r[i + 0.5]*(ro_22[i + 1] - ro_22[i])/hr - r[i - 0.5]*(-ro_22[i - 1] + ro_22[i])/hr) - hr*r[i]*(I*omega_2[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) - I*omega_2[i]_c*(I*omega_1[i]*ro_12[i]_c/(I*delta_2 + gamma') - I*omega_1[i]*(-ro_22[i] + ro_33[i])/(I*delta_2 + gamma')) + g_parallel*(-ro_11[i] + ro_22[i]) - gamma_32*ro_33[i])
 MAIN(2) - Ro11[i] coefficient: 
- 0
+ g_parallel*hr*r[i]
 MAIN(2) - Ro11[i+1] coefficient: 
  0
 MAIN(2) - Ro11[i-1] coefficient: 
@@ -412,101 +412,101 @@ MAIN(2) - Ro11*[i+1] coefficient:
 MAIN(2) - Ro11*[i-1] coefficient: 
  0
 MAIN(2) - Ro22[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma') - d_22*r[i + 0.5]/hr - d_22*r[i - 0.5]/hr - g_parallel*hr*r[i]
 MAIN(2) - Ro22[i+1] coefficient: 
  d_22*r[i + 0.5]/hr
 MAIN(2) - Ro22[i-1] coefficient: 
  d_22*r[i - 0.5]/hr
 MAIN(2) - Ro22*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma')
 MAIN(2) - Ro22*[i+1] coefficient: 
  0
 MAIN(2) - Ro22*[i-1] coefficient: 
  0
 MAIN(2) - Ro33[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma') + gamma_32*hr*r[i]
 MAIN(2) - Ro33[i+1] coefficient: 
  0
 MAIN(2) - Ro33[i-1] coefficient: 
  0
 MAIN(2) - Ro33*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma')
 MAIN(2) - Ro33*[i+1] coefficient: 
  0
 MAIN(2) - Ro33*[i-1] coefficient: 
  0
 MAIN(2) - Ro12[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma')
 MAIN(2) - Ro12[i+1] coefficient: 
  0
 MAIN(2) - Ro12[i-1] coefficient: 
  0
 MAIN(2) - Ro12*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma')
 MAIN(2) - Ro12*[i+1] coefficient: 
  0
 MAIN(2) - Ro12*[i-1] coefficient: 
  0
 MAIN(2) - independent variables: 
- (I**2*hr**2*omega_1[i]*omega_2[i]_c*r[None]*(I*delta_2 - gamma')*(ro_12[i]_c + ro_22[i] - ro_33[i]) + I**2*hr**2*omega_1[i]_c*omega_2[i]*r[None]*(I*delta_2 + gamma')*(-ro_12[i] - ro_22[i]_c + ro_33[i]_c) - d_22*ro_22[i]*(r[i + 0.5] + r[i - 0.5])*(I*delta_2 - gamma')*(I*delta_2 + gamma') + hr**2*r[None]*(I*delta_2 - gamma')*(I*delta_2 + gamma')*(g_parallel*ro_11[i] - g_parallel*ro_22[i] + gamma_32*ro_33[i]))/(hr*(I*delta_2 - gamma')*(I*delta_2 + gamma'))
+ 0
 ------------------------------------------
 MAIN(3): 
- d_33*(r[i + 0.5]*(ro_33[i + 1] - ro_33[i])/hr - r[i - 0.5]*(-ro_33[i - 1] + ro_33[i])/hr) - hr*r[None]*(-I*omega_1[i]*(I*omega_1[i]_c*(-ro_11[i]_c + ro_33[i]_c)/(-I*delta_1 + gamma') - I*omega_2[i]_c*ro_12[i]_c/(-I*delta_1 + gamma')) + I*omega_1[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) - I*omega_2[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) + I*omega_2[i]_c*(I*omega_1[i]*ro_12[i]_c/(I*delta_2 + gamma') - I*omega_1[i]*(-ro_22[i] + ro_33[i])/(I*delta_2 + gamma')) + ro_33[i]*(gamma_31 + gamma_32))
+ d_33*(r[i + 0.5]*(ro_33[i + 1] - ro_33[i])/hr - r[i - 0.5]*(-ro_33[i - 1] + ro_33[i])/hr) - hr*r[i]*(-I*omega_1[i]*(I*omega_1[i]_c*(-ro_11[i]_c + ro_33[i]_c)/(-I*delta_1 + gamma') - I*omega_2[i]_c*ro_12[i]_c/(-I*delta_1 + gamma')) + I*omega_1[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) - I*omega_2[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) + I*omega_2[i]_c*(I*omega_1[i]*ro_12[i]_c/(I*delta_2 + gamma') - I*omega_1[i]*(-ro_22[i] + ro_33[i])/(I*delta_2 + gamma')) + ro_33[i]*(gamma_31 + gamma_32))
 MAIN(3) - Ro11[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(I*delta_1 + gamma')
 MAIN(3) - Ro11[i+1] coefficient: 
  0
 MAIN(3) - Ro11[i-1] coefficient: 
  0
 MAIN(3) - Ro11*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_1 + gamma')
 MAIN(3) - Ro11*[i+1] coefficient: 
  0
 MAIN(3) - Ro11*[i-1] coefficient: 
  0
 MAIN(3) - Ro22[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma')
 MAIN(3) - Ro22[i+1] coefficient: 
  0
 MAIN(3) - Ro22[i-1] coefficient: 
  0
 MAIN(3) - Ro22*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma')
 MAIN(3) - Ro22*[i+1] coefficient: 
  0
 MAIN(3) - Ro22*[i-1] coefficient: 
  0
 MAIN(3) - Ro33[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(I*delta_1 + gamma') + I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma') - d_33*r[i + 0.5]/hr - d_33*r[i - 0.5]/hr - gamma_31*hr*r[i] - gamma_32*hr*r[i]
 MAIN(3) - Ro33[i+1] coefficient: 
  d_33*r[i + 0.5]/hr
 MAIN(3) - Ro33[i-1] coefficient: 
  d_33*r[i - 0.5]/hr
 MAIN(3) - Ro33*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_1 + gamma') + I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma')
 MAIN(3) - Ro33*[i+1] coefficient: 
  0
 MAIN(3) - Ro33*[i-1] coefficient: 
  0
 MAIN(3) - Ro12[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma') - I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(I*delta_1 + gamma')
 MAIN(3) - Ro12[i+1] coefficient: 
  0
 MAIN(3) - Ro12[i-1] coefficient: 
  0
 MAIN(3) - Ro12*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma') - I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(-I*delta_1 + gamma')
 MAIN(3) - Ro12*[i+1] coefficient: 
  0
 MAIN(3) - Ro12*[i-1] coefficient: 
  0
 MAIN(3) - independent variables: 
- (I**2*hr**2*omega_1[i]*omega_2[i]_c*r[None]*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(-ro_12[i]_c - ro_22[i] + ro_33[i]) + I**2*hr**2*omega_1[i]*r[None]*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma')*(omega_1[i]_c*ro_11[i]_c - omega_1[i]_c*ro_33[i]_c + omega_2[i]_c*ro_12[i]_c) + I**2*hr**2*omega_1[i]_c*omega_2[i]*r[None]*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 + gamma')*(ro_12[i] + ro_22[i]_c - ro_33[i]_c) + I**2*hr**2*omega_1[i]_c*r[None]*(I*delta_1 - gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma')*(-omega_1[i]*ro_11[i] + omega_1[i]*ro_33[i] - omega_2[i]*ro_12[i]) - d_33*ro_33[i]*(r[i + 0.5] + r[i - 0.5])*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma') - hr**2*r[None]*ro_33[i]*(gamma_31 + gamma_32)*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma'))/(hr*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma'))
+ 0
 ------------------------------------------
 MAIN(4): 
- d_12*(r[i + 0.5]*(ro_12[i + 1] - ro_12[i])/hr - r[i - 0.5]*(-ro_12[i - 1] + ro_12[i])/hr) - hr*r[None]*(I*omega_1[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) - I*omega_2[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) + ro_12[i]*(I*(-delta_1 + delta_2) + d_12*q**2 + g_parallel))
+ d_12*(r[i + 0.5]*(ro_12[i + 1] - ro_12[i])/hr - r[i - 0.5]*(-ro_12[i - 1] + ro_12[i])/hr) - hr*r[i]*(I*omega_1[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) - I*omega_2[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) + ro_12[i]*(I*(-delta_1 + delta_2) + d_12*q**2 + g_parallel))
 MAIN(4) - Ro11[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_1 + gamma')
 MAIN(4) - Ro11[i+1] coefficient: 
  0
 MAIN(4) - Ro11[i-1] coefficient: 
@@ -524,25 +524,25 @@ MAIN(4) - Ro22[i+1] coefficient:
 MAIN(4) - Ro22[i-1] coefficient: 
  0
 MAIN(4) - Ro22*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_2 + gamma')
 MAIN(4) - Ro22*[i+1] coefficient: 
  0
 MAIN(4) - Ro22*[i-1] coefficient: 
  0
 MAIN(4) - Ro33[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_1 + gamma')
 MAIN(4) - Ro33[i+1] coefficient: 
  0
 MAIN(4) - Ro33[i-1] coefficient: 
  0
 MAIN(4) - Ro33*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_2 + gamma')
 MAIN(4) - Ro33*[i+1] coefficient: 
  0
 MAIN(4) - Ro33*[i-1] coefficient: 
  0
 MAIN(4) - Ro12[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_2 + gamma') + I**2*hr*omega_2[i]*omega_2[i]_c*r[i]/(I*delta_1 + gamma') + I*delta_1*hr*r[i] - I*delta_2*hr*r[i] - d_12*hr*q**2*r[i] - d_12*r[i + 0.5]/hr - d_12*r[i - 0.5]/hr - g_parallel*hr*r[i]
 MAIN(4) - Ro12[i+1] coefficient: 
  d_12*r[i + 0.5]/hr
 MAIN(4) - Ro12[i-1] coefficient: 
@@ -554,18 +554,18 @@ MAIN(4) - Ro12*[i+1] coefficient:
 MAIN(4) - Ro12*[i-1] coefficient: 
  0
 MAIN(4) - independent variables: 
- (I**2*hr**2*omega_1[i]*omega_1[i]_c*r[None]*(I*delta_1 + gamma')*(-ro_12[i] - ro_22[i]_c + ro_33[i]_c) + I**2*hr**2*omega_2[i]_c*r[None]*(I*delta_2 - gamma')*(omega_1[i]*ro_11[i] - omega_1[i]*ro_33[i] + omega_2[i]*ro_12[i]) - d_12*ro_12[i]*(r[i + 0.5] + r[i - 0.5])*(I*delta_1 + gamma')*(I*delta_2 - gamma') + hr**2*r[None]*ro_12[i]*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_1 - I*delta_2 - d_12*q**2 - g_parallel))/(hr*(I*delta_1 + gamma')*(I*delta_2 - gamma'))
+ 0
 ------------------------------------------
 MAIN*(1): 
- d_11*(r[i + 0.5]*(ro_11[i + 1]_c - ro_11[i]_c)/hr - r[i - 0.5]*(-ro_11[i - 1]_c + ro_11[i]_c)/hr) - hr*r[None]*(I*omega_1[i]*(I*omega_1[i]_c*(-ro_11[i]_c + ro_33[i]_c)/(-I*delta_1 + gamma') - I*omega_2[i]_c*ro_12[i]_c/(-I*delta_1 + gamma')) - I*omega_1[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) + g_parallel*(ro_11[i]_c - ro_22[i]_c) - gamma_31*ro_33[i]_c)
+ d_11*(r[i + 0.5]*(ro_11[i + 1]_c - ro_11[i]_c)/hr - r[i - 0.5]*(-ro_11[i - 1]_c + ro_11[i]_c)/hr) - hr*r[i]*(I*omega_1[i]*(I*omega_1[i]_c*(-ro_11[i]_c + ro_33[i]_c)/(-I*delta_1 + gamma') - I*omega_2[i]_c*ro_12[i]_c/(-I*delta_1 + gamma')) - I*omega_1[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) + g_parallel*(ro_11[i]_c - ro_22[i]_c) - gamma_31*ro_33[i]_c)
 MAIN*(1) - Ro11[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(I*delta_1 + gamma')
 MAIN*(1) - Ro11[i+1] coefficient: 
  0
 MAIN*(1) - Ro11[i-1] coefficient: 
  0
 MAIN*(1) - Ro11*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_1 + gamma') - d_11*r[i + 0.5]/hr - d_11*r[i - 0.5]/hr - g_parallel*hr*r[i]
 MAIN*(1) - Ro11*[i+1] coefficient: 
  d_11*r[i + 0.5]/hr
 MAIN*(1) - Ro11*[i-1] coefficient: 
@@ -577,40 +577,40 @@ MAIN*(1) - Ro22[i+1] coefficient:
 MAIN*(1) - Ro22[i-1] coefficient: 
  0
 MAIN*(1) - Ro22*[i] coefficient: 
- 0
+ g_parallel*hr*r[i]
 MAIN*(1) - Ro22*[i+1] coefficient: 
  0
 MAIN*(1) - Ro22*[i-1] coefficient: 
  0
 MAIN*(1) - Ro33[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(I*delta_1 + gamma')
 MAIN*(1) - Ro33[i+1] coefficient: 
  0
 MAIN*(1) - Ro33[i-1] coefficient: 
  0
 MAIN*(1) - Ro33*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_1 + gamma') + gamma_31*hr*r[i]
 MAIN*(1) - Ro33*[i+1] coefficient: 
  0
 MAIN*(1) - Ro33*[i-1] coefficient: 
  0
 MAIN*(1) - Ro12[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(I*delta_1 + gamma')
 MAIN*(1) - Ro12[i+1] coefficient: 
  0
 MAIN*(1) - Ro12[i-1] coefficient: 
  0
 MAIN*(1) - Ro12*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(-I*delta_1 + gamma')
 MAIN*(1) - Ro12*[i+1] coefficient: 
  0
 MAIN*(1) - Ro12*[i-1] coefficient: 
  0
 MAIN*(1) - independent variables: 
- (I**2*hr**2*omega_1[i]*r[None]*(I*delta_1 + gamma')*(-omega_1[i]_c*ro_11[i]_c + omega_1[i]_c*ro_33[i]_c - omega_2[i]_c*ro_12[i]_c) + I**2*hr**2*omega_1[i]_c*r[None]*(I*delta_1 - gamma')*(omega_1[i]*ro_11[i] - omega_1[i]*ro_33[i] + omega_2[i]*ro_12[i]) - d_11*ro_11[i]_c*(r[i + 0.5] + r[i - 0.5])*(I*delta_1 - gamma')*(I*delta_1 + gamma') + hr**2*r[None]*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(-g_parallel*ro_11[i]_c + g_parallel*ro_22[i]_c + gamma_31*ro_33[i]_c))/(hr*(I*delta_1 - gamma')*(I*delta_1 + gamma'))
+ 0
 ------------------------------------------
 MAIN*(2): 
- d_22*(r[i + 0.5]*(ro_22[i + 1]_c - ro_22[i]_c)/hr - r[i - 0.5]*(-ro_22[i - 1]_c + ro_22[i]_c)/hr) - hr*r[None]*(I*omega_2[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) - I*omega_2[i]_c*(I*omega_1[i]*ro_12[i]_c/(I*delta_2 + gamma') - I*omega_1[i]*(-ro_22[i] + ro_33[i])/(I*delta_2 + gamma')) + g_parallel*(-ro_11[i]_c + ro_22[i]_c) - gamma_32*ro_33[i]_c)
+ d_22*(r[i + 0.5]*(ro_22[i + 1]_c - ro_22[i]_c)/hr - r[i - 0.5]*(-ro_22[i - 1]_c + ro_22[i]_c)/hr) - hr*r[i]*(I*omega_2[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) - I*omega_2[i]_c*(I*omega_1[i]*ro_12[i]_c/(I*delta_2 + gamma') - I*omega_1[i]*(-ro_22[i] + ro_33[i])/(I*delta_2 + gamma')) + g_parallel*(-ro_11[i]_c + ro_22[i]_c) - gamma_32*ro_33[i]_c)
 MAIN*(2) - Ro11[i] coefficient: 
  0
 MAIN*(2) - Ro11[i+1] coefficient: 
@@ -618,155 +618,155 @@ MAIN*(2) - Ro11[i+1] coefficient:
 MAIN*(2) - Ro11[i-1] coefficient: 
  0
 MAIN*(2) - Ro11*[i] coefficient: 
- 0
+ g_parallel*hr*r[i]
 MAIN*(2) - Ro11*[i+1] coefficient: 
  0
 MAIN*(2) - Ro11*[i-1] coefficient: 
  0
 MAIN*(2) - Ro22[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma')
 MAIN*(2) - Ro22[i+1] coefficient: 
  0
 MAIN*(2) - Ro22[i-1] coefficient: 
  0
 MAIN*(2) - Ro22*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma') - d_22*r[i + 0.5]/hr - d_22*r[i - 0.5]/hr - g_parallel*hr*r[i]
 MAIN*(2) - Ro22*[i+1] coefficient: 
  d_22*r[i + 0.5]/hr
 MAIN*(2) - Ro22*[i-1] coefficient: 
  d_22*r[i - 0.5]/hr
 MAIN*(2) - Ro33[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma')
 MAIN*(2) - Ro33[i+1] coefficient: 
  0
 MAIN*(2) - Ro33[i-1] coefficient: 
  0
 MAIN*(2) - Ro33*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma') + gamma_32*hr*r[i]
 MAIN*(2) - Ro33*[i+1] coefficient: 
  0
 MAIN*(2) - Ro33*[i-1] coefficient: 
  0
 MAIN*(2) - Ro12[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma')
 MAIN*(2) - Ro12[i+1] coefficient: 
  0
 MAIN*(2) - Ro12[i-1] coefficient: 
  0
 MAIN*(2) - Ro12*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma')
 MAIN*(2) - Ro12*[i+1] coefficient: 
  0
 MAIN*(2) - Ro12*[i-1] coefficient: 
  0
 MAIN*(2) - independent variables: 
- (I**2*hr**2*omega_1[i]*omega_2[i]_c*r[None]*(I*delta_2 - gamma')*(ro_12[i]_c + ro_22[i] - ro_33[i]) + I**2*hr**2*omega_1[i]_c*omega_2[i]*r[None]*(I*delta_2 + gamma')*(-ro_12[i] - ro_22[i]_c + ro_33[i]_c) - d_22*ro_22[i]_c*(r[i + 0.5] + r[i - 0.5])*(I*delta_2 - gamma')*(I*delta_2 + gamma') + hr**2*r[None]*(I*delta_2 - gamma')*(I*delta_2 + gamma')*(g_parallel*ro_11[i]_c - g_parallel*ro_22[i]_c + gamma_32*ro_33[i]_c))/(hr*(I*delta_2 - gamma')*(I*delta_2 + gamma'))
+ 0
 ------------------------------------------
 MAIN*(3): 
- d_33*(r[i + 0.5]*(ro_33[i + 1]_c - ro_33[i]_c)/hr - r[i - 0.5]*(-ro_33[i - 1]_c + ro_33[i]_c)/hr) - hr*r[None]*(-I*omega_1[i]*(I*omega_1[i]_c*(-ro_11[i]_c + ro_33[i]_c)/(-I*delta_1 + gamma') - I*omega_2[i]_c*ro_12[i]_c/(-I*delta_1 + gamma')) + I*omega_1[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) - I*omega_2[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) + I*omega_2[i]_c*(I*omega_1[i]*ro_12[i]_c/(I*delta_2 + gamma') - I*omega_1[i]*(-ro_22[i] + ro_33[i])/(I*delta_2 + gamma')) + ro_33[i]_c*(gamma_31 + gamma_32))
+ d_33*(r[i + 0.5]*(ro_33[i + 1]_c - ro_33[i]_c)/hr - r[i - 0.5]*(-ro_33[i - 1]_c + ro_33[i]_c)/hr) - hr*r[i]*(-I*omega_1[i]*(I*omega_1[i]_c*(-ro_11[i]_c + ro_33[i]_c)/(-I*delta_1 + gamma') - I*omega_2[i]_c*ro_12[i]_c/(-I*delta_1 + gamma')) + I*omega_1[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) - I*omega_2[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) + I*omega_2[i]_c*(I*omega_1[i]*ro_12[i]_c/(I*delta_2 + gamma') - I*omega_1[i]*(-ro_22[i] + ro_33[i])/(I*delta_2 + gamma')) + ro_33[i]_c*(gamma_31 + gamma_32))
 MAIN*(3) - Ro11[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(I*delta_1 + gamma')
 MAIN*(3) - Ro11[i+1] coefficient: 
  0
 MAIN*(3) - Ro11[i-1] coefficient: 
  0
 MAIN*(3) - Ro11*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_1 + gamma')
 MAIN*(3) - Ro11*[i+1] coefficient: 
  0
 MAIN*(3) - Ro11*[i-1] coefficient: 
  0
 MAIN*(3) - Ro22[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma')
 MAIN*(3) - Ro22[i+1] coefficient: 
  0
 MAIN*(3) - Ro22[i-1] coefficient: 
  0
 MAIN*(3) - Ro22*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma')
 MAIN*(3) - Ro22*[i+1] coefficient: 
  0
 MAIN*(3) - Ro22*[i-1] coefficient: 
  0
 MAIN*(3) - Ro33[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(I*delta_1 + gamma') + I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma')
 MAIN*(3) - Ro33[i+1] coefficient: 
  0
 MAIN*(3) - Ro33[i-1] coefficient: 
  0
 MAIN*(3) - Ro33*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_1 + gamma') + I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma') - d_33*r[i + 0.5]/hr - d_33*r[i - 0.5]/hr - gamma_31*hr*r[i] - gamma_32*hr*r[i]
 MAIN*(3) - Ro33*[i+1] coefficient: 
  d_33*r[i + 0.5]/hr
 MAIN*(3) - Ro33*[i-1] coefficient: 
  d_33*r[i - 0.5]/hr
 MAIN*(3) - Ro12[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma') - I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(I*delta_1 + gamma')
 MAIN*(3) - Ro12[i+1] coefficient: 
  0
 MAIN*(3) - Ro12[i-1] coefficient: 
  0
 MAIN*(3) - Ro12*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma') - I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(-I*delta_1 + gamma')
 MAIN*(3) - Ro12*[i+1] coefficient: 
  0
 MAIN*(3) - Ro12*[i-1] coefficient: 
  0
 MAIN*(3) - independent variables: 
- (I**2*hr**2*omega_1[i]*omega_2[i]_c*r[None]*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(-ro_12[i]_c - ro_22[i] + ro_33[i]) + I**2*hr**2*omega_1[i]*r[None]*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma')*(omega_1[i]_c*ro_11[i]_c - omega_1[i]_c*ro_33[i]_c + omega_2[i]_c*ro_12[i]_c) + I**2*hr**2*omega_1[i]_c*omega_2[i]*r[None]*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 + gamma')*(ro_12[i] + ro_22[i]_c - ro_33[i]_c) + I**2*hr**2*omega_1[i]_c*r[None]*(I*delta_1 - gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma')*(-omega_1[i]*ro_11[i] + omega_1[i]*ro_33[i] - omega_2[i]*ro_12[i]) - d_33*ro_33[i]_c*(r[i + 0.5] + r[i - 0.5])*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma') - hr**2*r[None]*ro_33[i]_c*(gamma_31 + gamma_32)*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma'))/(hr*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma'))
+ 0
 ------------------------------------------
 MAIN*(4): 
- d_12*(r[i + 0.5]*(ro_12[i + 1]_c - ro_12[i]_c)/hr - r[i - 0.5]*(-ro_12[i - 1]_c + ro_12[i]_c)/hr) - hr*r[None]*(-I*omega_1[i]*(I*omega_1[i]_c*(-ro_11[i]_c + ro_33[i]_c)/(-I*delta_1 + gamma') - I*omega_2[i]_c*ro_12[i]_c/(-I*delta_1 + gamma')) + I*omega_1[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) - I*omega_2[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) + I*omega_2[i]_c*(I*omega_1[i]*ro_12[i]_c/(I*delta_2 + gamma') - I*omega_1[i]*(-ro_22[i] + ro_33[i])/(I*delta_2 + gamma')) + ro_33[i]_c*(gamma_31 + gamma_32))
+ d_12*(r[i + 0.5]*(ro_12[i + 1]_c - ro_12[i]_c)/hr - r[i - 0.5]*(-ro_12[i - 1]_c + ro_12[i]_c)/hr) - hr*r[i]*(-I*omega_1[i]*(I*omega_1[i]_c*(-ro_11[i]_c + ro_33[i]_c)/(-I*delta_1 + gamma') - I*omega_2[i]_c*ro_12[i]_c/(-I*delta_1 + gamma')) + I*omega_1[i]_c*(-I*omega_1[i]*(-ro_11[i] + ro_33[i])/(I*delta_1 + gamma') + I*omega_2[i]*ro_12[i]/(I*delta_1 + gamma')) - I*omega_2[i]*(-I*omega_1[i]_c*ro_12[i]/(-I*delta_2 + gamma') + I*omega_1[i]_c*(-ro_22[i]_c + ro_33[i]_c)/(-I*delta_2 + gamma')) + I*omega_2[i]_c*(I*omega_1[i]*ro_12[i]_c/(I*delta_2 + gamma') - I*omega_1[i]*(-ro_22[i] + ro_33[i])/(I*delta_2 + gamma')) + ro_33[i]_c*(gamma_31 + gamma_32))
 MAIN*(4) - Ro11[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(I*delta_1 + gamma')
 MAIN*(4) - Ro11[i+1] coefficient: 
  0
 MAIN*(4) - Ro11[i-1] coefficient: 
  0
 MAIN*(4) - Ro11*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_1 + gamma')
 MAIN*(4) - Ro11*[i+1] coefficient: 
  0
 MAIN*(4) - Ro11*[i-1] coefficient: 
  0
 MAIN*(4) - Ro22[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma')
 MAIN*(4) - Ro22[i+1] coefficient: 
  0
 MAIN*(4) - Ro22[i-1] coefficient: 
  0
 MAIN*(4) - Ro22*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma')
 MAIN*(4) - Ro22*[i+1] coefficient: 
  0
 MAIN*(4) - Ro22*[i-1] coefficient: 
  0
 MAIN*(4) - Ro33[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(I*delta_1 + gamma') + I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma')
 MAIN*(4) - Ro33[i+1] coefficient: 
  0
 MAIN*(4) - Ro33[i-1] coefficient: 
  0
 MAIN*(4) - Ro33*[i] coefficient: 
- 0
+ I**2*hr*omega_1[i]*omega_1[i]_c*r[i]/(-I*delta_1 + gamma') + I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma') - gamma_31*hr*r[i] - gamma_32*hr*r[i]
 MAIN*(4) - Ro33*[i+1] coefficient: 
  0
 MAIN*(4) - Ro33*[i-1] coefficient: 
  0
 MAIN*(4) - Ro12[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(-I*delta_2 + gamma') - I**2*hr*omega_1[i]_c*omega_2[i]*r[i]/(I*delta_1 + gamma')
 MAIN*(4) - Ro12[i+1] coefficient: 
  0
 MAIN*(4) - Ro12[i-1] coefficient: 
  0
 MAIN*(4) - Ro12*[i] coefficient: 
- 0
+ -I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(I*delta_2 + gamma') - I**2*hr*omega_1[i]*omega_2[i]_c*r[i]/(-I*delta_1 + gamma') - d_12*r[i + 0.5]/hr - d_12*r[i - 0.5]/hr
 MAIN*(4) - Ro12*[i+1] coefficient: 
  d_12*r[i + 0.5]/hr
 MAIN*(4) - Ro12*[i-1] coefficient: 
  d_12*r[i - 0.5]/hr
 MAIN*(4) - independent variables: 
- (I**2*hr**2*omega_1[i]*omega_2[i]_c*r[None]*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(-ro_12[i]_c - ro_22[i] + ro_33[i]) + I**2*hr**2*omega_1[i]*r[None]*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma')*(omega_1[i]_c*ro_11[i]_c - omega_1[i]_c*ro_33[i]_c + omega_2[i]_c*ro_12[i]_c) + I**2*hr**2*omega_1[i]_c*omega_2[i]*r[None]*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 + gamma')*(ro_12[i] + ro_22[i]_c - ro_33[i]_c) + I**2*hr**2*omega_1[i]_c*r[None]*(I*delta_1 - gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma')*(-omega_1[i]*ro_11[i] + omega_1[i]*ro_33[i] - omega_2[i]*ro_12[i]) - d_12*ro_12[i]_c*(r[i + 0.5] + r[i - 0.5])*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma') - hr**2*r[None]*ro_33[i]_c*(gamma_31 + gamma_32)*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma'))/(hr*(I*delta_1 - gamma')*(I*delta_1 + gamma')*(I*delta_2 - gamma')*(I*delta_2 + gamma'))
+ 0
 ------------------------------------------
 ******************************************
 Right boundaries:

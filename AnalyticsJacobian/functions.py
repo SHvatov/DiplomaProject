@@ -43,7 +43,7 @@ def prepare_symbols(func_name: str,
         index_plus_one = f"{actual_index} + {actual_step}"
         index_minus_one = f"{actual_index} - {actual_step}"
 
-    symbols = Symbol(prepare_fun_symbol(index)), \
+    symbols = Symbol(prepare_fun_symbol(actual_index)), \
               Symbol(prepare_fun_symbol(index_plus_one)), \
               Symbol(prepare_fun_symbol(index_minus_one))
 
