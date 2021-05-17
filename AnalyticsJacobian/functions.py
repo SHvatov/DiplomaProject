@@ -1,4 +1,5 @@
 from functools import lru_cache
+from math import ceil, isclose
 from typing import Tuple
 
 from sympy import Expr
@@ -34,11 +35,20 @@ def prepare_symbols(func_name: str,
     try:
         actual_step = float(eval(step))
     except Exception:
-        actual_step = step if step is not None else "1"
+        actual_step = step if step is not None else \
+            1 if isinstance(actual_index, (int, float)) else "1"
+
+    if isinstance(actual_index, (int, float)):
+        if isclose(ceil(actual_index), actual_index):
+            actual_index = int(actual_index)
+
+    if isinstance(actual_step, (int, float)):
+        if isclose(ceil(actual_step), actual_step):
+            actual_step = int(actual_step)
 
     if isinstance(actual_index, (int, float)) and isinstance(actual_step, (int, float)):
-        index_plus_one = str(int(actual_index) + float(actual_step))
-        index_minus_one = str(int(actual_index) - float(actual_step))
+        index_plus_one = str(actual_index + actual_step)
+        index_minus_one = str(actual_index - actual_step)
     else:
         index_plus_one = f"{actual_index} + {actual_step}"
         index_minus_one = f"{actual_index} - {actual_step}"
