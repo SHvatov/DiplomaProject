@@ -1,0 +1,29 @@
+N=3
+Max real delta: 1.45519152283669E-11
+Max image delta: 2.91038304567337E-11
+
+N=4
+Max real delta: 2.91038304567337E-11
+Max image delta: 2.91038304567337E-11
+
+N=5
+Max real delta: 7.27595761418343E-12
+Max image delta: 2.91038304567337E-11
+
+N=8
+Max real delta: 1.45519152283669E-11
+Max image delta: 1.45519152283669E-11
+
+N=10
+Max real delta: 1.45519152283669E-11
+Max image delta: 1.45519152283669E-11
+
+N=12
+
+N=15
+
+N=20
+
+N=50
+
+N=100

@@ -1,0 +1,1 @@
+python3 equations.py > analytics_solution.txt
