@@ -3,7 +3,7 @@ module Constants
 
     real(8), parameter :: pi = 3.1415926536  
     real(8), parameter :: e = 2.7182818285 
-    real(8), parameter :: c = 2.9 * 10e10 
+    real(8), parameter :: c = 2.9e10
     complex(16), parameter :: IMG_UNIT = (0, 1) 
     
     real(8), parameter :: R = 3.3
@@ -40,8 +40,8 @@ module Constants
     complex(16), parameter :: DeltaStroke21 = IMG_UNIT * Delta2 + Gamma
     complex(16), parameter :: DeltaStroke22 = -IMG_UNIT * Delta2 + Gamma
 
-    complex(16), parameter :: DeltaGamma = IMG_UNIT * (Delta2 - Delta1) + (GParallel + q ** 2 * D12)
-    complex(16), parameter :: DeltaGammaStroke = -IMG_UNIT * (Delta2 - Delta1) + (GParallel + q ** 2 * D12)
+    complex(16), parameter :: DeltaGamma = IMG_UNIT * (Delta2 - Delta1) + (GParallel + q * q * D12)
+    complex(16), parameter :: DeltaGammaStroke = -IMG_UNIT * (Delta2 - Delta1) + (GParallel + q * q * D12)
 
     ! Dimensions of the matricies used in the project
     integer, parameter :: SYSTEM_VAR_NUM = 8

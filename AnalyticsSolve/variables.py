@@ -4,7 +4,7 @@ from sympy.abc import a, q, h
 from sympy.functions.elementary.complexes import conjugate
 from sympy.functions.elementary.exponential import exp
 
-N = 50
+N = 10
 R = 3.3
 
 # Rabi frequencies
@@ -34,7 +34,7 @@ ro_12_conjg = [Symbol(f"r12c[{i}]") for i in range(0, N + 1)]
 
 # omega_i[0], ..., omega_i[N]
 omega_1 = [C1 * exp(-(ri[i] / a) ** 2) for i in range(0, N + 1)]
-omega_2 = [C1 * exp(-(ri[i] / a) ** 2) for i in range(0, N + 1)]
+omega_2 = [C2 * exp(-(ri[i] / a) ** 2) for i in range(0, N + 1)]
 
 # conjg(omega_i[0]), ..., conjg(omega_i*[N])
 omega_1_conjg = [conjugate(omega_1[i]) for i in range(0, N + 1)]
@@ -104,8 +104,8 @@ def rim2_v(i: int) -> float:
 
 var_subs = {
     # Rabi frequencies
-    C1: 3 * 10e5,
-    C2: 3 * 10e5,
+    C1: 3e5,
+    C2: 3e5,
 
     # D11, ..., D12
     d_11: 10.0,

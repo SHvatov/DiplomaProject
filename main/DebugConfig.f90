@@ -2,7 +2,7 @@ module DebugConfig
     implicit none
 
     ! Global debug option
-    logical, parameter :: DEBUG_ALL = .false.
+    logical, parameter :: DEBUG_ALL = .true.
 
     ! Debug discrepancy option
     logical, parameter :: DEBUG_DISC = DEBUG_ALL .and. .true.

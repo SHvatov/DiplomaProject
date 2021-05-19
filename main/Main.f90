@@ -50,7 +50,7 @@ program main
     end if
 
     ! Then call zgesl
-    ! call zgesl(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, vectorB, 0)
+    call zgesl(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, vectorB, 0)
     if (DEBUG_MAIN) then
         print *, "Solution(*)"
         call printComplexVectorSlice(vectorB, 1, EXTENDED_MESH_DIM)
