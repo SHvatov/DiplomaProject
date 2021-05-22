@@ -15,8 +15,8 @@ module Constants
     real(8), parameter :: D33 = 10.0
     real(8), parameter :: D12 = 10.0
 
-    real(8), parameter :: GParallel = 5.0 * 10e1
-    real(8), parameter :: GPerpendicular = 1.0 * 10e2
+    real(8), parameter :: GParallel = 5.0e1
+    real(8), parameter :: GPerpendicular = 1.0e2
 
     real(8), parameter :: Delta1 = 0.0
     real(8), parameter :: Delta2 = 0.0

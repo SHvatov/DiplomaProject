@@ -14,5 +14,5 @@ module DebugConfig
     logical, parameter :: OUTPUT_MATR = .true.
 
     ! Whether to print main data
-    logical, parameter :: DEBUG_MAIN = .false.
+    logical, parameter :: DEBUG_MAIN = .true.
 end module DebugConfig

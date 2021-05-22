@@ -1,3 +1,5 @@
+from sympy import Expr
+
 from variables import *
 
 left_1 = (
@@ -202,29 +204,65 @@ right_2_conjg = ro_22_conjg[N] - 0.5
 right_3_conjg = ro_33_conjg[N]
 right_4_conjg = ro_12_conjg[N]
 
-equations = [
-    left_1,
-    left_2,
-    left_3,
-    left_4,
-    left_1_conjg,
-    left_2_conjg,
-    left_3_conjg,
-    left_4_conjg,
-    *main_1,
-    *main_2,
-    *main_3,
-    *main_4,
-    *main_1_conjg,
-    *main_2_conjg,
-    *main_3_conjg,
-    *main_4_conjg,
-    right_1,
-    right_2,
-    right_3,
-    right_4,
-    right_1_conjg,
-    right_2_conjg,
-    right_3_conjg,
-    right_4_conjg,
-]
+
+# equations = [
+#     left_1,
+#     left_2,
+#     left_3,
+#     left_4,
+#     left_1_conjg,
+#     left_2_conjg,
+#     left_3_conjg,
+#     left_4_conjg,
+#     *main_1,
+#     *main_2,
+#     *main_3,
+#     *main_4,
+#     *main_1_conjg,
+#     *main_2_conjg,
+#     *main_3_conjg,
+#     *main_4_conjg,
+#     right_1,
+#     right_2,
+#     right_3,
+#     right_4,
+#     right_1_conjg,
+#     right_2_conjg,
+#     right_3_conjg,
+#     right_4_conjg,
+# ]
+
+def prepare_ordered_equations() -> List[Expr]:
+    temp_eqs = [
+        left_1,
+        left_2,
+        left_3,
+        left_4,
+        left_1_conjg,
+        left_2_conjg,
+        left_3_conjg,
+        left_4_conjg,
+    ]
+
+    for i in range(0, N - 1):
+        temp_eqs.append(main_1[i])
+        temp_eqs.append(main_2[i])
+        temp_eqs.append(main_3[i])
+        temp_eqs.append(main_4[i])
+        temp_eqs.append(main_1_conjg[i])
+        temp_eqs.append(main_2_conjg[i])
+        temp_eqs.append(main_3_conjg[i])
+        temp_eqs.append(main_4_conjg[i])
+
+    temp_eqs.append(right_1)
+    temp_eqs.append(right_2)
+    temp_eqs.append(right_3)
+    temp_eqs.append(right_4)
+    temp_eqs.append(right_1_conjg)
+    temp_eqs.append(right_2_conjg)
+    temp_eqs.append(right_3_conjg)
+    temp_eqs.append(right_4_conjg)
+    return temp_eqs
+
+
+equations = prepare_ordered_equations()

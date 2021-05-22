@@ -125,8 +125,8 @@ const_subs = {
     delta_2: 0.0,
 
     # other coefficients
-    g_parallel: 5.0 * 10e1,
-    g_perpendicular: 1.0 * 10e2,
+    g_parallel: 5.0e1,
+    g_perpendicular: 1.0e2,
 
     # other consts
     q: 4.29 / 2.9,

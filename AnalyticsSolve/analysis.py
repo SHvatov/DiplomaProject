@@ -52,7 +52,9 @@ def calculate_discrepancy_matrix() -> Matrix:
     return Matrix(columns).T
 
 
-def analyse_matrices(analytics_matr: Matrix, fortran_matr_path: str) -> None:
+def analyse_matrices(analytics_matr: Matrix,
+                     fortran_matr_path: str,
+                     calculate_jordan: bool = False) -> None:
     print("Analytics matrix:")
     pprint(analytics_matr)
 
@@ -80,29 +82,30 @@ def analyse_matrices(analytics_matr: Matrix, fortran_matr_path: str) -> None:
     for i in range(shape(diff)[0]):
         for j in range(shape(diff)[1]):
             if abs(diff[i, j]) > 0.9:
-                print(f"Delta{(i, j)} = {diff[i, j]}")
+                print(f"Delta{(i, j)} = {diff[i, j]} = {analytics_matr[i, j]} - {fortran_matr[i, j]}")
 
-    # print("Calculating Jordan forms of both matrices...")
-    # PA, JA = analytics_matr.jordan_form()
-    # PF, JF = fortran_matr.jordan_form()
-    #
-    # print("Analytics matrix Jordan form: A = P * J * P^(-1)")
-    # print("P:")
-    # pprint(PA)
-    # print("J:")
-    # pprint(JA)
-    #
-    # print("Fortran calculated matrix Jordan form: A = P * J * P^(-1)")
-    # print("P:")
-    # pprint(PF)
-    # print("J:")
-    # pprint(JF)
-    #
-    # print("Deltas:")
-    # print("Delta P:")
-    # pprint(PA - PF)
-    # print("Delta J:")
-    # pprint(JA - JF)
+    if calculate_jordan:
+        print("Calculating Jordan forms of both matrices...")
+        PA, JA = analytics_matr.jordan_form()
+        PF, JF = fortran_matr.jordan_form()
+
+        print("Analytics matrix Jordan form: A = P * J * P^(-1)")
+        print("P:")
+        pprint(PA)
+        print("J:")
+        pprint(JA)
+
+        print("Fortran calculated matrix Jordan form: A = P * J * P^(-1)")
+        print("P:")
+        pprint(PF)
+        print("J:")
+        pprint(JF)
+
+        print("Deltas:")
+        print("Delta P:")
+        pprint(PA - PF)
+        print("Delta J:")
+        pprint(JA - JF)
 
     print("Discrepancy based matrix:")
     discrepancy_matr = calculate_discrepancy_matrix()
@@ -114,5 +117,5 @@ def analyse_matrices(analytics_matr: Matrix, fortran_matr_path: str) -> None:
 
     for i in range(shape(diff)[0]):
         for j in range(shape(diff)[1]):
-            if abs(diff[i, j]) > 0.9:
-                print(f"Delta{(i, j)} = {diff[i, j]}")
+            if abs(diff[i, j]) > 1e-3:
+                print(f"Delta{(i, j)} = {diff[i, j]} = {analytics_matr[i, j]} - {discrepancy_matr[i, j]}")
