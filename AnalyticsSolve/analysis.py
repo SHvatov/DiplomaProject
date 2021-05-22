@@ -29,7 +29,7 @@ def load_fortran_matrix(fortran_matr_path: str, matrix_dim: int) -> Matrix:
 
             # noinspection PyTypeChecker
             matrix[i - 1][j - 1] = value
-    return Matrix(matrix).T
+    return Matrix(matrix)
 
 
 def calculate_discrepancy_matrix() -> Matrix:
@@ -81,6 +81,28 @@ def analyse_matrices(analytics_matr: Matrix, fortran_matr_path: str) -> None:
         for j in range(shape(diff)[1]):
             if abs(diff[i, j]) > 0.9:
                 print(f"Delta{(i, j)} = {diff[i, j]}")
+
+    # print("Calculating Jordan forms of both matrices...")
+    # PA, JA = analytics_matr.jordan_form()
+    # PF, JF = fortran_matr.jordan_form()
+    #
+    # print("Analytics matrix Jordan form: A = P * J * P^(-1)")
+    # print("P:")
+    # pprint(PA)
+    # print("J:")
+    # pprint(JA)
+    #
+    # print("Fortran calculated matrix Jordan form: A = P * J * P^(-1)")
+    # print("P:")
+    # pprint(PF)
+    # print("J:")
+    # pprint(JF)
+    #
+    # print("Deltas:")
+    # print("Delta P:")
+    # pprint(PA - PF)
+    # print("Delta J:")
+    # pprint(JA - JF)
 
     print("Discrepancy based matrix:")
     discrepancy_matr = calculate_discrepancy_matrix()

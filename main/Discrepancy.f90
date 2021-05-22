@@ -40,7 +40,6 @@ contains
             + D22 * (Ro22Point(roMeshMatr, 1) - Ro22Point(roMeshMatr, 0)) / Hr * riPlusHalf(0)
         leftMain(2) = -calculateA3(roMeshMatr, 0) * Hr / 4 * riPlusHalf(0) &
             + D33 * (Ro33Point(roMeshMatr, 1) - Ro33Point(roMeshMatr, 0)) / Hr * riPlusHalf(0)
-
         leftMain(3) = -calculateA4(roMeshMatr, 0) * Hr / 4 * riPlusHalf(0) &
             + D12 * (Ro12Point(roMeshMatr, 1) - Ro12Point(roMeshMatr, 0)) / Hr * riPlusHalf(0)
 

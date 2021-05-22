@@ -19,7 +19,7 @@ contains
         complex(16), intent(in) :: delta
         complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: initialRoApproxMesh
         complex(16), dimension(1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM), intent(out) :: coeffMatrix
-    
+
         ! Local variables
         integer :: j
         complex(16), dimension(1:EXTENDED_MESH_DIM) :: psiVector
@@ -86,7 +86,7 @@ contains
         integer :: functionIterV, pointIterV, functionIndex, pointIndex
 
         ! Calculate the position of the point to add delta to
-        pointIndex = i / SYSTEM_VAR_NUM
+        pointIndex = (i - 1) / SYSTEM_VAR_NUM
         functionIndex = i - pointIndex * SYSTEM_VAR_NUM
 
         if (DEBUG_MATR) then
@@ -94,8 +94,8 @@ contains
         end if
 
         ! Copy the matricies
-        functionIter: do functionIterV = 1, SYSTEM_VAR_NUM
-            pointIter: do pointIterV = 0, N
+        functionIter : do functionIterV = 1, SYSTEM_VAR_NUM
+            pointIter : do pointIterV = 0, N
                 deltaRoApproxMesh(functionIterV, pointIterV) = initialRoApproxMesh(functionIterV, pointIterV)
             end do pointIter
         end do functionIter
