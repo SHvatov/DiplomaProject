@@ -1,11 +1,11 @@
 module Constants
     implicit none
 
-    real(8), parameter :: pi = 3.1415926536  
-    real(8), parameter :: e = 2.7182818285 
+    real(8), parameter :: pi = 3.1415926536
+    real(8), parameter :: e = 2.7182818285
     real(8), parameter :: c = 2.9e10
-    complex(16), parameter :: IMG_UNIT = (0, 1) 
-    
+    complex(16), parameter :: IMG_UNIT = (0, 1)
+
     real(8), parameter :: R = 3.3
     integer, parameter :: N = 4
     real(8), parameter :: Hr = R / N
@@ -23,7 +23,7 @@ module Constants
 
     real(8), parameter :: HFS = 4.29e10
     real(8), parameter :: q = HFS / c
-    real(8), parameter :: V = 1.9825e7 
+    real(8), parameter :: V = 1.9825e7
 
     real(8), parameter :: Gamma31 = 0.875e7
     real(8), parameter :: Gamma32 = 0.875e7
@@ -32,7 +32,7 @@ module Constants
 
     complex(16), parameter :: C1 = (3.0e5, 0.0)
     complex(16), parameter :: C2 = (3.0e5, 0.0)
-    real(8), parameter :: a = 1.4
+    real(8), parameter :: AC = 1.4
 
     complex(16), parameter :: DeltaStroke11 = IMG_UNIT * Delta1 + Gamma
     complex(16), parameter :: DeltaStroke12 = -IMG_UNIT * Delta1 + Gamma

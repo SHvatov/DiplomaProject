@@ -40,7 +40,7 @@ contains
         integer :: i
         complex(16) :: retval
         
-        retval = C1 * e ** (ri(i) / a)
+        retval = C1 * e ** (ri(i) / AC)
     end function Omega1
 
     function Omega1Conjg(i) result(retval)
@@ -56,7 +56,7 @@ contains
         integer :: i
         complex(16) :: retval
         
-        retval = C2 * e ** (ri(i) / a)
+        retval = C2 * e ** (ri(i) / AC)
     end function Omega2
 
     function Omega2Conjg(i) result(retval)

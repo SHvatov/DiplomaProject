@@ -1,8 +1,13 @@
-from sympy import I, shape
+import numpy as np
+from sympy import I, shape, simplify, expand
 from sympy.matrices import Matrix, zeros
 from sympy.printing import pprint
 
+from equations import equations
 from variables import N
+from variables import variables, const_subs
+
+DISCREPANCY_ITER_DELTA = 1.0
 
 
 def load_fortran_matrix(fortran_matr_path: str, matrix_dim: int) -> Matrix:
@@ -24,7 +29,27 @@ def load_fortran_matrix(fortran_matr_path: str, matrix_dim: int) -> Matrix:
 
             # noinspection PyTypeChecker
             matrix[i - 1][j - 1] = value
-    return Matrix(matrix)
+    return Matrix(matrix).T
+
+
+def calculate_discrepancy_matrix() -> Matrix:
+    const_sub_eq = [eq.subs(const_subs) for eq in equations]
+    const_sub_zeros = [eq.subs({v: 0.0 for v in variables}) for eq in const_sub_eq]
+    columns = []
+    for var in variables:
+        left_vars = list(variables)
+        left_vars.remove(var)
+
+        sub_eq = [eq.subs({v: 0.0 for v in left_vars}) for eq in const_sub_eq]
+        eval_eq = [eq.subs({var: DISCREPANCY_ITER_DELTA}) for eq in sub_eq]
+
+        columns.append(
+            [
+                simplify(expand((e1 - e0) / DISCREPANCY_ITER_DELTA))
+                for e1, e0 in zip(eval_eq, const_sub_zeros)
+            ]
+        )
+    return Matrix(columns).T
 
 
 def analyse_matrices(analytics_matr: Matrix, fortran_matr_path: str) -> None:
@@ -33,10 +58,11 @@ def analyse_matrices(analytics_matr: Matrix, fortran_matr_path: str) -> None:
 
     # noinspection PyBroadException
     try:
-        print("Condition number:")
-        print(analytics_matr.condition_number())
-    except Exception:
-        pass
+        numpy_matr = np.array(analytics_matr).astype(np.cdouble)
+        cond_number = np.linalg.cond(numpy_matr)
+        print(f"Condition number is {cond_number}")
+    except Exception as e:
+        print(f"Cannot calculate condition number: {e}")
 
     # noinspection PyBroadException
     try:
@@ -49,6 +75,19 @@ def analyse_matrices(analytics_matr: Matrix, fortran_matr_path: str) -> None:
 
     print("Diff:")
     diff = fortran_matr - analytics_matr
+    pprint(diff)
+
+    for i in range(shape(diff)[0]):
+        for j in range(shape(diff)[1]):
+            if abs(diff[i, j]) > 0.9:
+                print(f"Delta{(i, j)} = {diff[i, j]}")
+
+    print("Discrepancy based matrix:")
+    discrepancy_matr = calculate_discrepancy_matrix()
+    pprint(discrepancy_matr)
+
+    print("Diff:")
+    diff = discrepancy_matr - analytics_matr
     pprint(diff)
 
     for i in range(shape(diff)[0]):

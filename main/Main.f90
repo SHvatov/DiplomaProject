@@ -4,12 +4,13 @@ program main
     use VecMatrUtils
     use CoefficientMatrix
     use Discrepancy
+    use ExternalDataAdapter
 
     implicit none
 
     ! Local variables
     complex(16) :: delta = (1, 0)
-    complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N)  :: initialRoApproxMesh
+    complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N) :: initialRoApproxMesh
     complex(16), dimension(1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM) :: matrixA
     complex(16), dimension(1:EXTENDED_MESH_DIM) :: vectorB
 
@@ -42,20 +43,38 @@ program main
         call printComplexVectorSliceFmt(vectorB, 1, EXTENDED_MESH_DIM)
     end if
 
-    ! First call zgeco / zgefa
-    call zgeco(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, rcond, z)
-    if (DEBUG_MAIN) then
-        print *, "R Cond"
-        print *, rcond
-    end if
-
-    ! Then call zgesl
-    call zgesl(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, vectorB, 0)
-    if (DEBUG_MAIN) then
-        print *, "Solution(*)"
-        call printComplexVectorSlice(vectorB, 1, EXTENDED_MESH_DIM)
-
-        print *, "Solution_formatted(*)"
-        call printComplexVectorSliceFmt(vectorB, 1, EXTENDED_MESH_DIM)
-    end if
+!    call read_jacobian(matrixA)
+!    if (DEBUG_MAIN) then
+!        print *, "A(*, *)"
+!        call printComplexMatrixSlice(matrixA, 1, EXTENDED_MESH_DIM, 1, EXTENDED_MESH_DIM)
+!
+!        print *, "A_formatted(*, *)"
+!        call printComplexMatrixSliceFmt(matrixA, 1, EXTENDED_MESH_DIM, 1, EXTENDED_MESH_DIM)
+!    end if
+!
+!    call read_rhs(vectorB)
+!    if (DEBUG_MAIN) then
+!        print *, "B(*)"
+!        call printComplexVectorSlice(vectorB, 1, EXTENDED_MESH_DIM)
+!
+!        print *, "B_formatted(*)"
+!        call printComplexVectorSliceFmt(vectorB, 1, EXTENDED_MESH_DIM)
+!    end if
+!
+!    ! First call zgeco / zgefa
+!    call zgeco(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, rcond, z)
+!    if (DEBUG_MAIN) then
+!        print *, "R Cond"
+!        print *, rcond
+!    end if
+!
+!    ! Then call zgesl
+!    call zgesl(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, vectorB, 0)
+!    if (DEBUG_MAIN) then
+!        print *, "Solution(*)"
+!        call printComplexVectorSlice(vectorB, 1, EXTENDED_MESH_DIM)
+!
+!        print *, "Solution_formatted(*)"
+!        call printComplexVectorSliceFmt(vectorB, 1, EXTENDED_MESH_DIM)
+!    end if
 end program main

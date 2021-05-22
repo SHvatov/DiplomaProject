@@ -1,1 +1,1 @@
-python3 equations.py > analytics_solution.txt
+python3 solve.py > ../logs/python_logs.txt

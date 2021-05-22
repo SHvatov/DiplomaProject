@@ -1,10 +1,12 @@
+from typing import List
+
 from sympy import I
 from sympy import Symbol
 from sympy.abc import a, q, h
 from sympy.functions.elementary.complexes import conjugate
 from sympy.functions.elementary.exponential import exp
 
-N = 10
+N = 4
 R = 3.3
 
 # Rabi frequencies
@@ -102,7 +104,7 @@ def rim2_v(i: int) -> float:
     return ri_v(i) - R / (2 * N)
 
 
-var_subs = {
+const_subs = {
     # Rabi frequencies
     C1: 3e5,
     C2: 3e5,
@@ -136,3 +138,20 @@ var_subs = {
     **{ri_plus_half[i]: rip2_v(i) for i in range(0, N)},
     **{ri_minus_half[i]: rim2_v(i) for i in range(1, N + 1)},
 }
+
+
+def prepare_ordered_variables() -> List[Symbol]:
+    temp_vars = []
+    for i in range(0, N + 1):
+        temp_vars.append(ro_11[i])
+        temp_vars.append(ro_22[i])
+        temp_vars.append(ro_33[i])
+        temp_vars.append(ro_12[i])
+        temp_vars.append(ro_11_conjg[i])
+        temp_vars.append(ro_22_conjg[i])
+        temp_vars.append(ro_33_conjg[i])
+        temp_vars.append(ro_12_conjg[i])
+    return temp_vars
+
+
+variables = prepare_ordered_variables()

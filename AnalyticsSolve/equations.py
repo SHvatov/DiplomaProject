@@ -1,11 +1,3 @@
-from typing import List
-
-from sympy import linear_eq_to_matrix, init_printing, simplify, expand
-from sympy.matrices import Matrix
-from sympy.printing import pprint
-from sympy.solvers import solve
-
-from analysis import analyse_matrices
 from variables import *
 
 left_1 = (
@@ -236,65 +228,3 @@ equations = [
     right_3_conjg,
     right_4_conjg,
 ]
-
-
-# variables = [
-#     *ro_11,
-#     *ro_22,
-#     *ro_33,
-#     *ro_12,
-#     *ro_11_conjg,
-#     *ro_22_conjg,
-#     *ro_33_conjg,
-#     *ro_12_conjg,
-# ]
-
-def prepare_ordered_variables() -> List[Symbol]:
-    temp_vars = []
-    for i in range(0, N + 1):
-        temp_vars.append(ro_11[i])
-        temp_vars.append(ro_22[i])
-        temp_vars.append(ro_33[i])
-        temp_vars.append(ro_12[i])
-        temp_vars.append(ro_11_conjg[i])
-        temp_vars.append(ro_22_conjg[i])
-        temp_vars.append(ro_33_conjg[i])
-        temp_vars.append(ro_12_conjg[i])
-    return temp_vars
-
-
-variables = prepare_ordered_variables()
-
-if __name__ == '__main__':
-    init_printing(use_unicode=False, wrap_line=False)
-    print("Constants:")
-    pprint(var_subs)
-
-    print("Equations:")
-    for eq in equations:
-        pprint(eq)
-
-    print("Variables:")
-    pprint(variables)
-
-    A, b = linear_eq_to_matrix(equations, *variables)
-    print("Matrix A:")
-    pprint(A)
-
-    print("Vector b:")
-    pprint(b)
-
-    _A = A.subs(var_subs)
-    analyse_matrices(_A, "../app/log.txt")
-
-    sub_equations = [eq.subs(var_subs) for eq in equations]
-    sol = solve(sub_equations, *variables)
-    print("Solution:")
-    for k, v in sol.items():
-        pprint(f"{k} = {v}")
-
-    sol_vec = Matrix(list(sol.values()))
-    delta = _A * sol_vec - b
-    delta = simplify(expand(delta))
-    print("Delta:")
-    pprint(delta)

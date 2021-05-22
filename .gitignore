@@ -32,7 +32,10 @@
 *.app
 
 # PyCharm data
-AnalyticsJacobian/__pycache__
-AnalyticsJacobian/.idea
-AnalyticsJacobian/venv
+AnalyticsJacobian[deprecated]/__pycache__
+AnalyticsJacobian[deprecated]/.idea
+AnalyticsJacobian[deprecated]/venv
 .idea
+/AnalyticsSolve/venv/
+/AnalyticsSolve/.idea
+/AnalyticsSolve/__pycache__
