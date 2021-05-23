@@ -205,34 +205,13 @@ right_3_conjg = ro_33_conjg[N]
 right_4_conjg = ro_12_conjg[N]
 
 
-# equations = [
-#     left_1,
-#     left_2,
-#     left_3,
-#     left_4,
-#     left_1_conjg,
-#     left_2_conjg,
-#     left_3_conjg,
-#     left_4_conjg,
-#     *main_1,
-#     *main_2,
-#     *main_3,
-#     *main_4,
-#     *main_1_conjg,
-#     *main_2_conjg,
-#     *main_3_conjg,
-#     *main_4_conjg,
-#     right_1,
-#     right_2,
-#     right_3,
-#     right_4,
-#     right_1_conjg,
-#     right_2_conjg,
-#     right_3_conjg,
-#     right_4_conjg,
-# ]
-
 def prepare_ordered_equations() -> List[Expr]:
+    """
+    Prepares the equations on the specific order, so that Jacobian would have trigonal form.
+    Returns
+    -------
+    List of expressions, that represent the equation system.
+    """
     temp_eqs = [
         left_1,
         left_2,
@@ -265,4 +244,5 @@ def prepare_ordered_equations() -> List[Expr]:
     return temp_eqs
 
 
+# Equation system
 equations = prepare_ordered_equations()

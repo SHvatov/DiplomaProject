@@ -7,8 +7,45 @@ from sympy.solvers import solve
 
 from analysis import analyse_matrices
 from equations import equations
-from fortran_utils import save_jacobian, save_rhs
 from variables import const_subs, variables
+
+
+def solve_sympy(eqs: List[Expr], vvars: List[Symbol]) -> Dict[str, complex]:
+    """
+    Solves the given system with given variables using sympy.solve.
+    Parameters
+    ----------
+    eqs - list of expressions, that represent the equations system.
+    vvars - list of variables, used in the equations system.
+
+    Returns
+    -------
+    Dictionary, where key is the name of the variable and value is its solution.
+    """
+    sub_equations = [eq.subs(const_subs) for eq in eqs]
+    sol = solve(sub_equations, *vvars)
+
+    result = dict()
+    for k, v in sol.items():
+        result[str(k)] = complex(*v.as_real_imag())
+    return result
+
+
+def solve_numpy(A: Matrix, b: Matrix) -> List[np.cdouble]:
+    """
+    Solves the given equation system represented as Ax = b using numpy.solve.
+    Parameters
+    ----------
+    A - Jacobian matrix of coefficients of the variables.
+    b - right-side vector.
+
+    Returns
+    -------
+    List of complex solutions of the system.
+    """
+    numpy_A = np.array(A).astype(np.cdouble)
+    numpy_B = np.array(b).astype(np.cdouble)
+    return np.linalg.solve(numpy_A, numpy_B)
 
 
 def main() -> None:
@@ -37,14 +74,10 @@ def main() -> None:
     print("Evaluated vector b:")
     pprint(b)
 
-    save_jacobian(A)
-    save_rhs(b)
+    # save_jacobian(A)
+    # save_rhs(b)
 
-    # noinspection PyBroadException
-    try:
-        analyse_matrices(A, fortran_matr_path="../logs/fortran_logs.txt")
-    except Exception as e:
-        print(f"Could not perform matrix analysis: {e}")
+    analyse_matrices(A)
 
     sol_s = solve_sympy(equations, variables)
     print("Sympy solution:")
@@ -60,22 +93,6 @@ def main() -> None:
     for f, s in zip(sol_s.values(), sol_n):
         diff = abs(f - s)
         print(f"{diff}, bigger than 10^-6: {diff > 1e-6}")
-
-
-def solve_sympy(eqs: List[Expr], vvars: List[Symbol]) -> Dict[str, complex]:
-    sub_equations = [eq.subs(const_subs) for eq in eqs]
-    sol = solve(sub_equations, *vvars)
-
-    result = dict()
-    for k, v in sol.items():
-        result[str(k)] = complex(*v.as_real_imag())
-    return result
-
-
-def solve_numpy(A: Matrix, b: Matrix) -> List[np.cdouble]:
-    numpy_A = np.array(A).astype(np.cdouble)
-    numpy_B = np.array(b).astype(np.cdouble)
-    return np.linalg.solve(numpy_A, numpy_B)
 
 
 if __name__ == '__main__':

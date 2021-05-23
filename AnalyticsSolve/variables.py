@@ -6,7 +6,10 @@ from sympy.abc import a, q, h
 from sympy.functions.elementary.complexes import conjugate
 from sympy.functions.elementary.exponential import exp
 
+# size of the mesh
 N = 5
+
+# radius of the area
 R = 3.3
 
 # Rabi frequencies
@@ -141,6 +144,12 @@ const_subs = {
 
 
 def prepare_ordered_variables() -> List[Symbol]:
+    """
+    Prepares the variables in the specific order, so that Jacobian would have trigonal form.
+    Returns
+    -------
+    List of the variables.
+    """
     temp_vars = []
     for i in range(0, N + 1):
         temp_vars.append(ro_11[i])
@@ -154,4 +163,5 @@ def prepare_ordered_variables() -> List[Symbol]:
     return temp_vars
 
 
+# Ordered ro[i] and ro*[i] variables.
 variables = prepare_ordered_variables()
