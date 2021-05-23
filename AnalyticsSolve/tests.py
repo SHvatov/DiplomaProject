@@ -21,8 +21,8 @@ from variables import const_subs, variables, ri_v
 #     "r12": lambda k: complex(0, 0),
 # }
 TEST_FUNCTIONS: Dict[str, Callable[[int], complex]] = {
-    "r11": lambda k: complex(0.5, 0),
-    "r22": lambda k: complex(0.5, 0),
+    "r11": lambda k: complex(0.5, -1),
+    "r22": lambda k: complex(0.5, 1),
     "r33": lambda k: complex(0, 0),
     "r12": lambda k: complex(0, 0),
 }
@@ -76,12 +76,14 @@ if __name__ == '__main__':
         f = func_name[0:func_name.index('[')]
         i = int(func_name[func_name.index('[') + 1:func_name.index(']')])
 
+        is_conjg = False
         try:
             f = f[0:f.index("c")]
+            is_conjg = True
         except ValueError:
             pass
 
-        test_value = TEST_FUNCTIONS[f](i)
+        test_value = TEST_FUNCTIONS[f](i) if not is_conjg else TEST_FUNCTIONS[f](i).conjugate()
         diff = abs(sol_value - test_value)
         if diff > max_diff:
             max_diff = diff
