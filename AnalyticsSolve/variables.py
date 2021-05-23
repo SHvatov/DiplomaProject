@@ -6,7 +6,7 @@ from sympy.abc import a, q, h
 from sympy.functions.elementary.complexes import conjugate
 from sympy.functions.elementary.exponential import exp
 
-N = 4
+N = 5
 R = 3.3
 
 # Rabi frequencies
