@@ -7,7 +7,7 @@ from sympy.functions.elementary.complexes import conjugate
 from sympy.functions.elementary.exponential import exp
 
 # size of the mesh
-N = 5
+N = 4
 
 # radius of the area
 R = 3.3

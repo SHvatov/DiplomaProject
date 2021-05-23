@@ -74,20 +74,17 @@ def main() -> None:
     print("Evaluated vector b:")
     pprint(b)
 
-    # save_jacobian(A)
-    # save_rhs(b)
-
     analyse_matrices(A)
 
     sol_s = solve_sympy(equations, variables)
     print("Sympy solution:")
     for k, v in sol_s.items():
-        pprint(f"{k} = {v}")
+        print(f"{k} = {v}")
 
     sol_n = solve_numpy(A, b)
     print("Numpy solution:")
     for v in sol_n:
-        pprint(v)
+        print(v)
 
     print("Solution delta")
     for f, s in zip(sol_s.values(), sol_n):

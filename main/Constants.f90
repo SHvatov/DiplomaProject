@@ -7,7 +7,7 @@ module Constants
     complex(16), parameter :: IMG_UNIT = (0, 1)
 
     real(8), parameter :: R = 3.3
-    integer, parameter :: N = 5
+    integer, parameter :: N = 4
     real(8), parameter :: Hr = R / N
 
     real(8), parameter :: D11 = 10.0

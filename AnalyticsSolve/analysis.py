@@ -9,7 +9,7 @@ from equations import equations
 from variables import variables, const_subs
 
 DISCREPANCY_ITER_DELTA = 1.0
-APPROXIMATION_DELTA = complex(1e-3, 0)
+APPROXIMATION_DELTA = complex(1.0, 0)
 FORTRAN_MATRIX_PATH = "../logs/fortran_logs.txt"
 
 
