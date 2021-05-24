@@ -1,3 +1,11 @@
+r"""
+This module contains different functions that can be used to perform the analysis
+of the Jacobian computed during the solution of the equations system
+and to compare it with Jacobians generated using other methods: by fortran app, or
+by differentiating the discrepancy function.
+
+@author: shvatov
+"""
 from typing import List
 
 import numpy as np

@@ -1,3 +1,9 @@
+r"""
+This module contains the functions, that can be used in order to solve
+the original system using either Sympy, or Numpy library.
+
+@author: shvatov
+"""
 from typing import List, Dict
 
 import numpy as np

@@ -1,3 +1,9 @@
+r"""
+This module contains the definitions of the equations in the system,
+that are created using integral-interpolation method beforehand.
+
+@author: shvatov
+"""
 from sympy import Expr
 
 from variables import *

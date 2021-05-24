@@ -1,3 +1,10 @@
+r"""
+Module, which can be used as a standalone application, which performs
+testing of the solutions on different test functions.
+
+@author: shvatov
+"""
+from math import sin, cos
 from typing import Callable, Dict, List, Tuple
 
 from sympy import init_printing
@@ -8,22 +15,17 @@ from variables import const_subs, variables, ri_v
 
 # Dictionary, where key is a name of the function and value is a lambda,
 # which produces complex values of that function.
-# TEST_FUNCTIONS: Dict[str, Callable[[int], complex]] = {
-#     "r11": lambda k: sin(ri_v(k)) ** 2,
-#     "r22": lambda k: cos(ri_v(k)) ** 2,
-#     "r33": lambda k: complex(-0.5, 0),
-#     "r12": lambda k: complex(0, 0),
-# }
-# TEST_FUNCTIONS: Dict[str, Callable[[int], complex]] = {
-#     "r11": lambda k: ri_v(k) ** 2,
-#     "r22": lambda k: ri_v(k) ** 2,
-#     "r33": lambda k: 1 - 2 * ri_v(k) ** 2,
-#     "r12": lambda k: complex(0, 0),
-# }
 TEST_FUNCTIONS: Dict[str, Callable[[int], complex]] = {
     "r11": lambda k: complex(0.5, -1),
     "r22": lambda k: complex(0.5, 1),
     "r33": lambda k: complex(0, 0),
+    "r12": lambda k: complex(0, 0),
+}
+
+TEST_FUNCTIONS_1: Dict[str, Callable[[int], complex]] = {
+    "r11": lambda k: sin(ri_v(k)) ** 2,
+    "r22": lambda k: cos(ri_v(k)) ** 2,
+    "r33": lambda k: complex(-0.5, 0),
     "r12": lambda k: complex(0, 0),
 }
 

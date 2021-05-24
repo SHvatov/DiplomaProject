@@ -1,3 +1,9 @@
+r"""
+This module contains the definitions of the variables and constants that are
+being used in the equation system.
+
+@author: shvatov
+"""
 from typing import List
 
 from sympy import I
