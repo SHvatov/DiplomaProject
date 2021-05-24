@@ -16,15 +16,15 @@ contains
     subroutine prepareCoefficientMatrix(initialRoApproxMesh, delta, coeffMatrix)
         implicit none
         ! Arguments
-        complex(16), intent(in) :: delta
-        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: initialRoApproxMesh
-        complex(16), dimension(1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM), intent(out) :: coeffMatrix
+        complex(8), intent(in) :: delta
+        complex(8), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: initialRoApproxMesh
+        complex(8), dimension(1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM), intent(out) :: coeffMatrix
 
         ! Local variables
         integer :: j
-        complex(16), dimension(1:EXTENDED_MESH_DIM) :: psiVector
-        complex(16), dimension(1:EXTENDED_MESH_DIM) :: initialApproxPsiVector
-        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N) :: deltaRoApproxMesh
+        complex(8), dimension(1:EXTENDED_MESH_DIM) :: psiVector
+        complex(8), dimension(1:EXTENDED_MESH_DIM) :: initialApproxPsiVector
+        complex(8), dimension(1:SYSTEM_VAR_NUM, 0:N) :: deltaRoApproxMesh
 
         ! Calculate the discrepancy in the initial approximation
         call calculateDiscrepancy(initialRoApproxMesh, initialApproxPsiVector)
@@ -77,10 +77,10 @@ contains
     subroutine prepareDeltaApproximation(initialRoApproxMesh, delta, i, deltaRoApproxMesh)
         implicit none
         ! Arguments
-        complex(16), intent(in) :: delta
+        complex(8), intent(in) :: delta
         integer, intent(in) :: i
-        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: initialRoApproxMesh
-        complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(out) :: deltaRoApproxMesh
+        complex(8), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(in) :: initialRoApproxMesh
+        complex(8), dimension(1:SYSTEM_VAR_NUM, 0:N), intent(out) :: deltaRoApproxMesh
 
         ! Local variables
         integer :: functionIterV, pointIterV, functionIndex, pointIndex

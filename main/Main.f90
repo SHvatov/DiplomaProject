@@ -9,13 +9,13 @@ program main
     implicit none
 
     ! Local variables
-    complex(16) :: delta = (1, 0)
-    complex(16), dimension(1:SYSTEM_VAR_NUM, 0:N) :: initialRoApproxMesh
-    complex(16), dimension(1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM) :: matrixA
-    complex(16), dimension(1:EXTENDED_MESH_DIM) :: vectorB
+    complex(8) :: delta = (1, 0)
+    complex(8), dimension(1:SYSTEM_VAR_NUM, 0:N) :: initialRoApproxMesh
+    complex(8), dimension(1:EXTENDED_MESH_DIM, 1:EXTENDED_MESH_DIM) :: matrixA
+    complex(8), dimension(1:EXTENDED_MESH_DIM) :: vectorB
 
     ! Util variables for z*
-    complex(16), dimension(1:EXTENDED_MESH_DIM) :: z = 0
+    complex(8), dimension(1:EXTENDED_MESH_DIM) :: z = 0
     integer, dimension(1:EXTENDED_MESH_DIM) :: ipvt = 0
     real(8) :: rcond
 
@@ -52,6 +52,7 @@ program main
 
     ! Then call zgesl
     call zgesl(matrixA, EXTENDED_MESH_DIM, EXTENDED_MESH_DIM, ipvt, vectorB, 0)
+    vectorB = -vectorB
     if (DEBUG_MAIN) then
         print *, "Solution(*)"
         call printComplexVectorSlice(vectorB, 1, EXTENDED_MESH_DIM)

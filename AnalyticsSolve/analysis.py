@@ -96,7 +96,7 @@ def calculate_cond_number(matrix: Matrix) -> complex:
     # noinspection PyBroadException
     try:
         numpy_matr = np.array(matrix).astype(np.cdouble)
-        cond_number = np.linalg.cond(numpy_matr)
+        cond_number = np.linalg.cond(numpy_matr, p='fro')
         return complex(cond_number.real, cond_number.imag)
     except Exception as e:
         print(f"Cannot calculate condition number: {e}")
