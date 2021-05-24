@@ -7,22 +7,21 @@ testing of the solutions on different test functions.
 from math import sin, cos
 from typing import Callable, Dict, List, Tuple
 
-from sympy import init_printing
-from sympy.solvers import solve
+from sympy import Expr, Symbol
 
-from equations import equations
-from variables import const_subs, variables, ri_v
+from AnalyticsSolve.solve import solve_system, EquationSystemSolutionParams, SolutionMethod
+from variables import ri_v
 
 # Dictionary, where key is a name of the function and value is a lambda,
 # which produces complex values of that function.
-TEST_FUNCTIONS: Dict[str, Callable[[int], complex]] = {
+TEST_FUNCTIONS_1: Dict[str, Callable[[int], complex]] = {
     "r11": lambda k: complex(0.5, -1),
     "r22": lambda k: complex(0.5, 1),
     "r33": lambda k: complex(0, 0),
     "r12": lambda k: complex(0, 0),
 }
 
-TEST_FUNCTIONS_1: Dict[str, Callable[[int], complex]] = {
+TEST_FUNCTIONS: Dict[str, Callable[[int], complex]] = {
     "r11": lambda k: sin(ri_v(k)) ** 2,
     "r22": lambda k: cos(ri_v(k)) ** 2,
     "r33": lambda k: complex(-0.5, 0),
@@ -30,17 +29,19 @@ TEST_FUNCTIONS_1: Dict[str, Callable[[int], complex]] = {
 }
 
 
-def approximate_test_solution() -> Dict[str, complex]:
+def approximate_test_solution(equations: List[Expr],
+                              variables: List[Symbol],
+                              coefficients: Dict[Symbol, complex]) -> Dict[str, complex]:
     # 1. replace constants in the equation system
     print("Step 1. replace constants in the equation system...")
-    const_sub_equations = [eq.subs(const_subs) for eq in equations]
+    const_sub_equations = [eq.subs(coefficients) for eq in equations]
 
     # 2. prepare test function values
     print("Step 2. prepare test function values...")
     test_ro_values = dict()
-    for vv in variables:
-        func = vv.name[0:vv.name.index('[')]
-        t_point = int(vv.name[vv.name.index('[') + 1:vv.name.index(']')])
+    for v in variables:
+        func = v.name[0:v.name.index('[')]
+        t_point = int(v.name[v.name.index('[') + 1:v.name.index(']')])
 
         try:
             is_conjg = func.index("c") is not None
@@ -52,7 +53,7 @@ def approximate_test_solution() -> Dict[str, complex]:
         else:
             value = TEST_FUNCTIONS[func](t_point)
 
-        test_ro_values[vv] = value
+        test_ro_values[v] = value
 
     # 3. prepare test variables with S(r) source addition
     print("Step 3. prepare test variables with S(r) source addition...")
@@ -61,18 +62,22 @@ def approximate_test_solution() -> Dict[str, complex]:
 
     # 4. solve the system
     print("Step 4. solve the system...")
-    sol = solve(test_equations, *variables)
+    params = EquationSystemSolutionParams(method=SolutionMethod.SYMPY)
+    solution = solve_system(test_equations, variables, coefficients, params)
+
     result = dict()
-    for k, vv in sol.items():
-        result[str(k)] = complex(*vv.as_real_imag())
+    for i, v in enumerate(solution):
+        result[variables[i].name] = v
     return result
 
 
 if __name__ == '__main__':
-    init_printing(use_unicode=False, wrap_line=False)
+    from equations import equations
+    from variables import coefficients, variables
 
     max_diff = 0.0
-    solution = approximate_test_solution()
+    solution = approximate_test_solution(equations, variables, coefficients)
+
     print("Solution:")
     for func_name, sol_value in solution.items():
         f = func_name[0:func_name.index('[')]
@@ -92,7 +97,7 @@ if __name__ == '__main__':
 
         print(f"{func_name} = {sol_value}, expected: {test_value}")
         print(f"Diff = {diff}, bigger than 10^-6: {diff > 1e-6}\n")
-    print(f"Max diff between actual and expected solutions: {max_diff}\n")
+    print(f"\nMax diff between actual and expected solutions: {max_diff}\n")
 
     points_by_func: Dict[str, List[Tuple[str, float, complex]]] = dict()
     for f, v in solution.items():
@@ -104,7 +109,7 @@ if __name__ == '__main__':
         else:
             points_by_func[f_name] = [point]
 
-    print("Output for further plotting:")
+    print("\nOutput for further plotting:")
     for f, points in points_by_func.items():
         print(f)
         for point in points:

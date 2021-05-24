@@ -113,7 +113,7 @@ def rim2_v(i: int) -> float:
     return ri_v(i) - R / (2 * N)
 
 
-const_subs = {
+coefficients = {
     # Rabi frequencies
     C1: 3e5,
     C2: 3e5,
