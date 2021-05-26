@@ -5,8 +5,8 @@ from auxilary_functions import *
 def prepare_main_boundary_1() -> Expr:
     ri, ri_plus_half, ri_minus_half = get_variable()
     ro_11, ro_11_plus_one, ro_11_minus_one = get_ro_func("11", "i")
-    d_11 = get_d_const("11")
-    return d_11 * (ri_plus_half * (ro_11_plus_one - ro_11) / hr
+    D11 = get_d_const("11")
+    return D11 * (ri_plus_half * (ro_11_plus_one - ro_11) / hr
                    - ri_minus_half * (ro_11 - ro_11_minus_one) / hr) \
            - hr * ri * prepare_a1("i")
 
@@ -45,8 +45,8 @@ def prepare_main_boundary_4() -> Expr:
 def prepare_main_boundary_conjg_1() -> Expr:
     ri, ri_plus_half, ri_minus_half = get_variable()
     ro_11_conjg, ro_11_plus_one_conjg, ro_11_minus_one_conjg = get_ro_func_conjg("11", "i")
-    d_11 = get_d_const("11")
-    return d_11 * (ri_plus_half * (ro_11_plus_one_conjg - ro_11_conjg) / hr
+    D11 = get_d_const("11")
+    return D11 * (ri_plus_half * (ro_11_plus_one_conjg - ro_11_conjg) / hr
                    - ri_minus_half * (ro_11_conjg - ro_11_minus_one_conjg) / hr) \
            - hr * ri * prepare_a1_conjg("i")
 

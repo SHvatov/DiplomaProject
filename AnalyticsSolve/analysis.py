@@ -14,8 +14,7 @@ from sympy import I, shape, simplify, expand, Symbol, Expr
 from sympy.matrices import Matrix, zeros
 from sympy.printing import pprint
 
-from equations import equations
-from variables import variables, coefficients
+from equation import EquationSystem
 
 DISCREPANCY_ITER_DELTA = 1.0
 APPROXIMATION_DELTA = complex(1.0, 0)
@@ -71,7 +70,7 @@ def load_fortran_matrix(fortran_matr_path: str, matrix_dim: int) -> Matrix:
         return zeros(rows=matrix_dim, cols=matrix_dim)
 
 
-def calculate_discrepancy_matrix(iter_delta: complex) -> Matrix:
+def calculate_discrepancy_matrix(iter_delta: complex, intervals_num: int) -> Matrix:
     """
     Calculates the Jacobian based on the discrepancy differential.
     Parameters
@@ -82,6 +81,10 @@ def calculate_discrepancy_matrix(iter_delta: complex) -> Matrix:
     -------
     Jacobian matrix.
     """
+    equation_system = EquationSystem.acquire_equation_system(intervals_number=intervals_num)
+    equations, variables, coefficients = equation_system.ordered_equations(), \
+                                         equation_system.ordered_variables(), \
+                                         equation_system.coefficients()
     const_sub_eq = [eq.subs(coefficients) for eq in equations]
 
     def calculate_discrepancy(var: Symbol, zero_approx: List[Expr]) -> List[Expr]:
@@ -143,10 +146,14 @@ def compare_matrices(lhs: Matrix, rhs: Matrix, approx_delta: complex) -> None:
     pprint(diff)
 
     rows, cols = shape(diff)
+    delta_present = False
     for i in range(rows):
         for j in range(cols):
             if abs(diff[i, j]) > approx_delta:
                 print(f"Delta{(i, j)} = {diff[i, j]} = {lhs[i, j]} - {rhs[i, j]}")
+                delta_present = True
+    if not delta_present:
+        print("No elements surpass specified delta!")
 
 
 def analyse_matrix(analytics_matr: Matrix,
@@ -174,8 +181,8 @@ def analyse_matrix(analytics_matr: Matrix,
         analytics_matr_cond_number = calculate_cond_number(analytics_matr)
         print(f"Condition number is {analytics_matr_cond_number}")
 
+    analytics_matr_dim, _ = shape(analytics_matr)
     if params.compare_with_fortran:
-        analytics_matr_dim, _ = shape(analytics_matr)
         fortran_matr = load_fortran_matrix(fortran_matr_path=FORTRAN_MATRIX_PATH,
                                            matrix_dim=analytics_matr_dim)
         print("Fortran matrix:")
@@ -183,7 +190,9 @@ def analyse_matrix(analytics_matr: Matrix,
         compare_matrices(analytics_matr, fortran_matr, approx_delta=APPROXIMATION_DELTA)
 
     if params.compare_with_discrepancy:
-        discrepancy_matr = calculate_discrepancy_matrix(iter_delta=DISCREPANCY_ITER_DELTA)
+        intervals = analytics_matr_dim // 8 - 1
+        discrepancy_matr = calculate_discrepancy_matrix(iter_delta=DISCREPANCY_ITER_DELTA,
+                                                        intervals_num=intervals)
 
         print("Discrepancy based matrix:")
         pprint(discrepancy_matr)

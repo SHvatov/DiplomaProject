@@ -40,8 +40,8 @@ module Constants
     complex(8), parameter :: DeltaStroke21 = IMG_UNIT * Delta2 + Gamma
     complex(8), parameter :: DeltaStroke22 = -IMG_UNIT * Delta2 + Gamma
 
-    complex(8), parameter :: DeltaGamma = IMG_UNIT * (Delta2 - Delta1) + (GParallel + q * q * D12)
-    complex(8), parameter :: DeltaGammaStroke = -IMG_UNIT * (Delta2 - Delta1) + (GParallel + q * q * D12)
+    complex(8), parameter :: DeltaGamma = IMG_UNIT * (Delta2 - Delta1) + (GPerpendicular + q * q * D12)
+    complex(8), parameter :: DeltaGammaStroke = -IMG_UNIT * (Delta2 - Delta1) + (GPerpendicular + q * q * D12)
 
     ! Dimensions of the matricies used in the project
     integer, parameter :: SYSTEM_VAR_NUM = 8
