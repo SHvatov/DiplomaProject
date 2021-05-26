@@ -5,12 +5,20 @@ testing of the solutions on different test functions.
 @author: shvatov
 """
 from math import sin, cos
-from typing import Callable, Dict, List, Tuple
+from typing import Callable, Dict, List, Tuple, Sequence
 
 from sympy import Expr, Symbol
 
-from AnalyticsSolve.solve import solve_system, EquationSystemSolutionParams, SolutionMethod
-from variables import ri_v
+from solve import solve_system, EquationSystemSolutionParams, SolutionMethod
+
+# System parameters
+N = 5
+R = 3.3
+
+
+def ri_v(i: int) -> float:
+    return R / N * i
+
 
 # Dictionary, where key is a name of the function and value is a lambda,
 # which produces complex values of that function.
@@ -29,8 +37,8 @@ TEST_FUNCTIONS: Dict[str, Callable[[int], complex]] = {
 }
 
 
-def approximate_test_solution(equations: List[Expr],
-                              variables: List[Symbol],
+def approximate_test_solution(equations: Sequence[Expr],
+                              variables: Sequence[Symbol],
                               coefficients: Dict[Symbol, complex]) -> Dict[str, complex]:
     # 1. replace constants in the equation system
     print("Step 1. replace constants in the equation system...")
@@ -72,11 +80,13 @@ def approximate_test_solution(equations: List[Expr],
 
 
 if __name__ == '__main__':
-    from equations import equations
-    from variables import coefficients, variables
+    from equation import EquationSystem
 
     max_diff = 0.0
-    solution = approximate_test_solution(equations, variables, coefficients)
+    equation_system = EquationSystem(intervals_number=N, radius=R)
+    solution = approximate_test_solution(equations=equation_system.ordered_equations(),
+                                         variables=equation_system.ordered_variables(),
+                                         coefficients=equation_system.coefficients())
 
     print("Solution:")
     for func_name, sol_value in solution.items():

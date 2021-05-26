@@ -82,4 +82,11 @@ def prepare_parser() -> argparse.ArgumentParser:
                         dest="plot",
                         help="whether to plot functions ro11, ro22, ro33, ro44 or not")
 
+    parser.add_argument("--intervals-number", "-n",
+                        action="store",
+                        default=4,
+                        type=int,
+                        dest="n",
+                        help="number of the interval to be used in the method;")
+
     return parser

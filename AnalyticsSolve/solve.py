@@ -7,7 +7,7 @@ the original system using either Sympy, or Numpy library.
 import sys
 from dataclasses import dataclass
 from enum import Enum
-from typing import List, Dict
+from typing import List, Dict, Sequence
 
 import numpy as np
 from sympy import linear_eq_to_matrix, init_printing, Expr, Symbol, Matrix
@@ -15,6 +15,7 @@ from sympy.printing import pprint
 from sympy.solvers import solve
 
 from analysis import analyse_matrix, MatrixAnalysisParams
+from plot import plot_solution
 
 DELTA = 1e-10
 
@@ -39,12 +40,13 @@ class EquationSystemSolutionParams:
     method: SolutionMethod = SolutionMethod.SYMPY
     verbose_output: bool = False
     check_basic_conditions: bool = False
+    n: int = 4
     plot_real_part: bool = False
     analysis_params: MatrixAnalysisParams = None
 
 
-def solve_sympy(equations: List[Expr],
-                variables: List[Symbol],
+def solve_sympy(equations: Sequence[Expr],
+                variables: Sequence[Symbol],
                 coefficients: Dict[Symbol, complex]) -> Dict[str, complex]:
     """
     Solves the given system with given variables using sympy.solve.
@@ -84,8 +86,8 @@ def solve_numpy(A: Matrix, b: Matrix) -> List[np.cdouble]:
     return np.linalg.solve(_A, _b)
 
 
-def solve_system(equations: List[Expr],
-                 variables: List[Symbol],
+def solve_system(equations: Sequence[Expr],
+                 variables: Sequence[Symbol],
                  coefficients: Dict[Symbol, complex],
                  params: EquationSystemSolutionParams = None) -> List[complex]:
     """
@@ -141,7 +143,7 @@ def solve_system(equations: List[Expr],
             pprint(b)
 
     if params.analysis_params is not None:
-        analyse_matrix(A)
+        analyse_matrix(A, params.analysis_params)
 
     solution = None
     if params.method == SolutionMethod.SYMPY:
@@ -159,8 +161,7 @@ def solve_system(equations: List[Expr],
                 print(f"V{i} = {v}")
 
     if params.check_basic_conditions:
-        from variables import N
-
+        N = params.n
         value_by_variable = dict()
         for i, v in enumerate(solution):
             value_by_variable[str(variables[i])] = v
@@ -214,9 +215,8 @@ def solve_system(equations: List[Expr],
 
 
 if __name__ == '__main__':
-    from equations import equations
-    from variables import coefficients, variables
-    from cli_parser import prepare_parser
+    from equation import EquationSystem
+    from cli import prepare_parser
 
     parser = prepare_parser()
     args = parser.parse_args(sys.argv[1:])
@@ -224,6 +224,7 @@ if __name__ == '__main__':
     params = EquationSystemSolutionParams(method=SolutionMethod(args.method),
                                           verbose_output=args.verbose,
                                           check_basic_conditions=args.check,
+                                          n=args.n,
                                           plot_real_part=args.plot,
                                           analysis_params=MatrixAnalysisParams(
                                               print_matrix=args.verbose,
@@ -231,4 +232,13 @@ if __name__ == '__main__':
                                               compare_with_discrepancy=args.discrepancy,
                                               calc_cond_number=args.rcond,
                                           ))
-    solve_system(equations, variables, coefficients, params)
+    print(f"Params: \n{params}\n")
+    equation_system = EquationSystem.acquire_equation_system(intervals_number=params.n)
+    equation_system.ordered_equations()
+    solution = solve_system(equations=equation_system.ordered_equations(),
+                            variables=equation_system.ordered_variables(),
+                            coefficients=equation_system.coefficients(),
+                            params=params)
+
+    if params.plot_real_part:
+        plot_solution(solution)
