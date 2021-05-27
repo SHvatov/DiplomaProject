@@ -90,7 +90,7 @@ class EquationSystemExpression:
         return hash(self.__expressions)
 
 
-@dataclass(init=False)
+@dataclass(init=False, eq=False)
 class EquationSystem:
     # Number of the intervals in the scheme
     N: int
@@ -644,6 +644,11 @@ class EquationSystem:
     def __hash__(self) -> int:
         # Each equation system is uniquely identified by N and R
         return hash(self.N) * 256 + hash(self.R) * 128
+
+    def __eq__(self, other):
+        return isinstance(other, EquationSystem) \
+               and self.N == other.N \
+               and self.R == other.R
 
     @staticmethod
     @lru_cache(maxsize=None)
