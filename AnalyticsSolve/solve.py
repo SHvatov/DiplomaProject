@@ -15,6 +15,8 @@ from sympy.printing import pprint
 from sympy.solvers import solve
 
 from analysis import analyse_matrix, MatrixAnalysisParams
+from cli import prepare_parser
+from equation import EquationSystem
 from plot import plot_solution
 
 DELTA = 1e-10
@@ -215,9 +217,6 @@ def solve_system(equations: Sequence[Expr],
 
 
 if __name__ == '__main__':
-    from equation import EquationSystem
-    from cli import prepare_parser
-
     parser = prepare_parser()
     args = parser.parse_args(sys.argv[1:])
 
