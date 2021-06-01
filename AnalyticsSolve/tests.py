@@ -4,7 +4,7 @@ testing of the solutions on different test functions.
 
 @author: shvatov
 """
-from math import sin, cos, exp
+from math import sin, cos
 from typing import Callable, Dict, List, Tuple, Sequence
 
 from sympy import Expr, Symbol
@@ -13,8 +13,8 @@ from equation import EquationSystem
 from solve import solve_system, EquationSystemSolutionParams, SolutionMethod
 
 # System parameters
-N = 5
-R = 3.3
+N = 40
+R = 3.14
 
 
 def ri_v(i: int) -> float:
@@ -40,13 +40,6 @@ TEST_FUNCTIONS_2: Dict[str, Callable[[int], complex]] = {
 TEST_FUNCTIONS_3: Dict[str, Callable[[int], complex]] = {
     "r11": lambda k: sin(ri_v(k)) ** 2 + 0.5,
     "r22": lambda k: cos(ri_v(k)) ** 2 - 0.5,
-    "r33": lambda k: complex(0, 0),
-    "r12": lambda k: complex(0, 0),
-}
-
-TEST_FUNCTIONS_4: Dict[str, Callable[[int], complex]] = {
-    "r11": lambda k: (exp(ri_v(k)) - 27.1126389207) + 0.5,
-    "r22": lambda k: (-exp(ri_v(k)) + 27.1126389207) + 0.5,
     "r33": lambda k: complex(0, 0),
     "r12": lambda k: complex(0, 0),
 }
@@ -96,7 +89,7 @@ def approximate_test_solution(equations: Sequence[Expr],
 
 
 if __name__ == '__main__':
-    test_functions = [TEST_FUNCTIONS_1, TEST_FUNCTIONS_2, TEST_FUNCTIONS_3, TEST_FUNCTIONS_4]
+    test_functions = [TEST_FUNCTIONS_1, TEST_FUNCTIONS_2, TEST_FUNCTIONS_3]
     for i, test_functions_dict in enumerate(test_functions):
         print(f"\nPerforming tests on {i + 1} test case")
 
